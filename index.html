@@ -106,7 +106,7 @@
 
     /* English colour overrides */
     .page-eng{--accent:#e8b86d;--accent2:#a78bfa}
-    .page-eng .subj-eyebrow{color:var(--accent)}
+    .page-eng .subj-eyebrow{color:#a78bfa}
     .page-eng .subj-h1{background:linear-gradient(135deg,var(--text) 40%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .page-eng .mode-btn.active{background:linear-gradient(135deg,#a78bfa,#7c5cbf)}
     .page-eng .tab.active{background:#a78bfa;border-color:#a78bfa;color:#fff}
@@ -320,7 +320,7 @@
       <span class="sc-arrow">↗</span>
       <div class="sc-icon"><svg width="36" height="26" viewBox="0 0 36 26" style="border-radius:3px" xmlns="http://www.w3.org/2000/svg"><rect width="12" height="26" fill="#002395"/><rect x="12" width="12" height="26" fill="#fff"/><rect x="24" width="12" height="26" fill="#ED2939"/></svg></div>
       <div class="sc-title fr">French</div>
-      <div class="sc-desc">Passé composé avec avoir, hotel &amp; restaurant vocabulary, and dialogue writing. 40 cards.</div>
+      <div class="sc-desc">Passé composé avec avoir, hotel &amp; restaurant vocabulary, and dialogue writing. 57 cards.</div>
       <div class="sc-tags">
         <span class="sc-tag">🃏 Flashcards</span>
         <span class="sc-tag">🔗 Match</span>
@@ -1479,6 +1479,26 @@ const FR_ALL=[
   {cat:"Hotel Dialogue",q:"How do you say 'here is your key' and 'have a good stay'?",a:"'Voici votre clé.' (Here is your key.) · 'Bonne séjour !' (Have a good stay!)"},
   {cat:"Hotel Dialogue",q:"What are polite closing phrases for a hotel or restaurant dialogue?",a:"'Merci beaucoup.' (Thank you very much.) · 'Au revoir.' (Goodbye.) · 'Bonne journée !' (Have a good day!)"},
   {cat:"Hotel Dialogue",q:"How do you say 'a single room / a double room' in French?",a:"Une chambre simple (single room) · Une chambre double (double room) · Une chambre avec deux lits (room with two beds)."},
+  // ── Negation & Questions ──
+  {cat:"Negation & Questions",q:"How do you make the passé composé negative?",a:"Wrap ne...pas around the auxiliary verb (avoir). Example: Je n'ai pas mangé. (I didn't eat.) Elle n'a pas fini. (She didn't finish.) Ne comes before avoir, pas comes after."},
+  {cat:"Negation & Questions",q:"'Il a regardé la télé.' → make it negative.",a:"Il n'a pas regardé la télé. (He didn't watch TV.) Remember: ne + auxiliary + pas, then the past participle stays the same."},
+  {cat:"Negation & Questions",q:"'Vous avez travaillé hier.' → make it negative.",a:"Vous n'avez pas travaillé hier. (You didn't work yesterday.)"},
+  {cat:"Negation & Questions",q:"How do you form a yes/no question in passé composé using est-ce que?",a:"Est-ce que + subject + avoir conjugated + past participle. Example: Est-ce que tu as mangé ? (Did you eat?) Est-ce qu'il a fini ? (Did he finish?)"},
+  {cat:"Negation & Questions",q:"How do you form a question in passé composé using inversion?",a:"Swap the subject pronoun and auxiliary verb with a hyphen. Example: As-tu mangé ? (Did you eat?) A-t-il fini ses devoirs ? (Did he finish his homework?) Note the -t- inserted between vowels."},
+  {cat:"Negation & Questions",q:"Translate: 'Did they do their homework?' (using est-ce que)",a:"Est-ce qu'ils ont fait leurs devoirs ?"},
+  // ── More Irregular Verbs ──
+  {cat:"Irregular Verbs",q:"What is the past participle of 'boire' (to drink)?",a:"Bu. Example: J'ai bu un café ce matin. (I drank a coffee this morning.)"},
+  {cat:"Irregular Verbs",q:"What is the past participle of 'lire' (to read)?",a:"Lu. Example: Elle a lu un roman fantastique. (She read a great novel.)"},
+  {cat:"Irregular Verbs",q:"What is the past participle of 'prendre' (to take)?",a:"Pris. Example: Nous avons pris le bus. (We took the bus.) Also: apprendre → appris, comprendre → compris."},
+  {cat:"Irregular Verbs",q:"What is the past participle of 'voir' (to see)?",a:"Vu. Example: Tu as vu ce film ? (Did you see that film?) Ils ont vu leurs amis. (They saw their friends.)"},
+  {cat:"Irregular Verbs",q:"What is the past participle of 'écrire' (to write)?",a:"Écrit. Example: J'ai écrit une lettre. (I wrote a letter.) Also: décrire → décrit."},
+  {cat:"Irregular Verbs",q:"What is the past participle of 'mettre' (to put/place)?",a:"Mis. Example: Il a mis son manteau. (He put on his coat.) Also: permettre → permis, promettre → promis."},
+  {cat:"Irregular Verbs",q:"What is the past participle of 'dire' (to say/tell)?",a:"Dit. Example: Elle a dit bonjour. (She said hello.) Qu'est-ce que tu as dit ? (What did you say?)"},
+  // ── Time Expressions ──
+  {cat:"Time Expressions",q:"What time expressions are commonly used with passé composé?",a:"Hier (yesterday) · Avant-hier (the day before yesterday) · La semaine dernière (last week) · L'année dernière (last year) · Il y a + time (… ago). Example: Il y a deux jours = two days ago."},
+  {cat:"Time Expressions",q:"Translate: 'I ate at a restaurant yesterday.'",a:"J'ai mangé au restaurant hier. (Hier = yesterday, placed at the end or beginning of the sentence.)"},
+  {cat:"Time Expressions",q:"Translate: 'Last week, we visited the Eiffel Tower.'",a:"La semaine dernière, nous avons visité la Tour Eiffel."},
+  {cat:"Time Expressions",q:"How do you say 'two hours ago' in French? Use it in a sentence.",a:"Il y a deux heures. Example: J'ai fini mes devoirs il y a deux heures. (I finished my homework two hours ago.)"},
   // ── Grammar Practice ──
   {cat:"Grammar Practice",q:"'Tu joues au football.' → passé composé?",a:"Tu as joué au football."},
   {cat:"Grammar Practice",q:"'Nous visitons le musée.' → passé composé?",a:"Nous avons visité le musée."},
@@ -1513,6 +1533,19 @@ const FR_MATCH_POOL=[
   {id:17,term:"-RE verb past participle",def:"Remove -RE, add -U (e.g. vendre → vendu)"},
   {id:18,term:"Je voudrais...",      def:"I would like... (polite ordering phrase)"},
   {id:19,term:"C'est délicieux !",   def:"It's delicious!"},
+  {id:20,term:"Je n'ai pas mangé",      def:"I didn't eat (negation: ne...pas around avoir)"},
+  {id:21,term:"Est-ce que tu as fini ?", def:"Did you finish? (est-ce que question)"},
+  {id:22,term:"As-tu vu ce film ?",      def:"Did you see that film? (inversion question)"},
+  {id:23,term:"boire → bu",             def:"to drink → drunk (irregular past participle)"},
+  {id:24,term:"prendre → pris",         def:"to take → taken (irregular past participle)"},
+  {id:25,term:"voir → vu",              def:"to see → seen (irregular past participle)"},
+  {id:26,term:"écrire → écrit",         def:"to write → written (irregular past participle)"},
+  {id:27,term:"dire → dit",             def:"to say → said (irregular past participle)"},
+  {id:28,term:"mettre → mis",           def:"to put → put/placed (irregular past participle)"},
+  {id:29,term:"hier",                   def:"yesterday (time expression with passé composé)"},
+  {id:30,term:"il y a deux jours",      def:"two days ago (il y a + time)"},
+  {id:31,term:"la semaine dernière",    def:"last week"},
+  {id:32,term:"lire → lu",             def:"to read → read (irregular past participle)"},
 ];
 
 const FR_FITB_BANK=[
