@@ -1,15 +1,14 @@
 
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- saved from url=(0050)https://judezaatari.github.io/Grade-9-Study-Tools/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grade 9 Study Hub</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 100 100&#39;&gt;&lt;text y=&#39;.9em&#39; font-size=&#39;90&#39;&gt;%F0%9F%93%9A&lt;/text&gt;&lt;/svg&gt;">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Grade 9 Study Hub_files/css2" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -54,7 +53,7 @@
     }
     .topnav-tab:hover{color:var(--text);background:rgba(255,255,255,0.05)}
     .topnav-tab.active-eng{background:linear-gradient(135deg,rgba(167,139,250,0.25),rgba(232,184,109,0.15));border-color:rgba(167,139,250,0.4);color:#e8b86d}
-    .topnav-tab.active-bio{background:linear-gradient(135deg,rgba(110,231,183,0.2),rgba(96,165,250,0.15));border-color:rgba(96,165,250,0.4);color:#6ee7b7}
+    .topnav-tab.active-bio{background:linear-gradient(135deg,rgba(249,112,102,0.25),rgba(251,146,60,0.15));border-color:rgba(249,112,102,0.4);color:#f97066}
 
     /* ── PAGES ── */
     .page{display:none;width:100%;max-width:720px;padding:2rem 1.25rem 4rem;position:relative;z-index:1}
@@ -72,6 +71,7 @@
     .home-sub{font-size:14px;color:var(--muted);line-height:1.6}
     .subject-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:2.5rem;animation:fadeDown 0.6s 0.15s ease both}
     @media(max-width:500px){.subject-cards{grid-template-columns:1fr}}
+    .subject-cards > :last-child:nth-child(odd){grid-column:1/-1;max-width:360px;margin:0 auto;width:100%}
     .subject-card{
       border-radius:var(--radius);border:1px solid var(--border);
       padding:1.75rem 1.5rem;cursor:pointer;transition:all 0.22s;
@@ -83,14 +83,14 @@
     }
     .subject-card:hover::before{opacity:1}
     .subject-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.18)}
-    .subject-card.eng{background:linear-gradient(145deg,#1a1635,#1e1a30)}
-    .subject-card.bio{background:linear-gradient(145deg,#0d1f2a,#0e2233)}
+    .subject-card.eng{background:linear-gradient(145deg,#0d0f18,#0f1120)}
+    .subject-card.bio{background:linear-gradient(145deg,#0d0f18,#0f1120)}
     .subject-card:hover.eng{box-shadow:0 16px 48px rgba(167,139,250,0.15)}
-    .subject-card:hover.bio{box-shadow:0 16px 48px rgba(96,165,250,0.12)}
+    .subject-card:hover.bio{box-shadow:0 16px 48px rgba(249,112,102,0.15)}
     .sc-icon{font-size:2rem;margin-bottom:0.75rem}
     .sc-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin-bottom:0.3rem}
     .sc-title.eng{color:#e8b86d}
-    .sc-title.bio{color:#6ee7b7}
+    .sc-title.bio{color:#f97066}
     .sc-desc{font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:1rem}
     .sc-tags{display:flex;flex-wrap:wrap;gap:6px}
     .sc-tag{font-size:10.5px;font-weight:500;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.1);color:var(--muted)}
@@ -113,12 +113,29 @@
     .page-eng .card-face.back{background:linear-gradient(145deg,#1e1b3a,#251f40)}
 
     /* Bio colour overrides */
-    .page-bio{--accent:#6ee7b7;--accent2:#60a5fa}
+    .page-bio{--accent:#f97066;--accent2:#fb923c}
     .page-bio .subj-eyebrow{color:var(--accent)}
     .page-bio .subj-h1{background:linear-gradient(135deg,var(--text) 40%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .page-bio .mode-btn.active{background:linear-gradient(135deg,#60a5fa,#2563eb)}
-    .page-bio .tab.active{background:#60a5fa;border-color:#60a5fa;color:#fff}
-    .page-bio .card-face.back{background:linear-gradient(145deg,#0d1f2e,#0e2233)}
+    .page-bio .mode-btn.active{background:linear-gradient(135deg,#f97066,#e85d52)}
+    .page-bio .tab.active{background:#f97066;border-color:#f97066;color:#fff}
+    .page-bio .card-face.back{background:linear-gradient(145deg,#2a1010,#2e1208)}
+
+    /* French colour overrides */
+    .subject-card.fr{background:linear-gradient(145deg,#0d0f18,#0f1120)}
+    .subject-card:hover.fr{box-shadow:0 16px 48px rgba(252,211,77,0.12)}
+    .sc-title.fr{color:#f59e0b}
+    .topnav-tab.active-fr{background:linear-gradient(135deg,rgba(252,211,77,0.25),rgba(248,113,113,0.15));border-color:rgba(252,211,77,0.4);color:#f59e0b}
+    .page-fr{--accent:#f59e0b;--accent2:#fb7185}
+    .page-fr .subj-eyebrow{color:var(--accent)}
+    .page-fr .subj-h1{background:linear-gradient(135deg,var(--text) 40%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-fr .mode-btn.active{background:linear-gradient(135deg,#f59e0b,#d97706)}
+    .page-fr .tab.active{background:#f59e0b;border-color:#f59e0b;color:#0b0d14}
+    .page-fr .card-face.back{background:linear-gradient(145deg,#1e1a10,#2a2000)}
+    .page-fr .dot.current{background:var(--accent);width:20px;border-radius:4px}
+    .page-fr .done-banner{background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(251,113,133,0.12));border:1px solid rgba(245,158,11,0.25)}
+    .page-fr .done-banner h3{color:var(--accent)}
+    .page-fr .match-tile.selected{border-color:#f59e0b;background:rgba(245,158,11,0.18);transform:translateY(-2px);box-shadow:0 0 0 3px rgba(245,158,11,0.25)}
+    .page-fr .fitb-btn.primary{background:linear-gradient(135deg,#f59e0b,#d97706)}
 
     /* ── MODE SWITCHER ── */
     .mode-switcher{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;animation:fadeDown 0.6s 0.1s ease both}
@@ -173,7 +190,7 @@
     .page-bio .dot.current{background:var(--accent);width:20px;border-radius:4px}
     .page-eng .done-banner{background:linear-gradient(135deg,rgba(232,184,109,0.12),rgba(167,139,250,0.12));border:1px solid rgba(232,184,109,0.25)}
     .page-eng .done-banner h3{color:var(--accent)}
-    .page-bio .done-banner{background:linear-gradient(135deg,rgba(110,231,183,0.12),rgba(96,165,250,0.12));border:1px solid rgba(110,231,183,0.25)}
+    .page-bio .done-banner{background:linear-gradient(135deg,rgba(249,112,102,0.12),rgba(251,146,60,0.12));border:1px solid rgba(249,112,102,0.25)}
     .page-bio .done-banner h3{color:var(--accent)}
 
     /* ── MATCH ── */
@@ -193,7 +210,7 @@
     .match-tile.wrong{border-color:var(--red);background:rgba(248,113,113,0.15);animation:shake 0.35s ease}
     .match-tile.term{font-weight:500;font-family:'Playfair Display',serif;font-size:13px}
     .page-eng .match-tile.selected{border-color:#a78bfa;background:rgba(167,139,250,0.18);transform:translateY(-2px);box-shadow:0 0 0 3px rgba(167,139,250,0.25)}
-    .page-bio .match-tile.selected{border-color:#60a5fa;background:rgba(96,165,250,0.18);transform:translateY(-2px);box-shadow:0 0 0 3px rgba(96,165,250,0.25)}
+    .page-bio .match-tile.selected{border-color:#f97066;background:rgba(249,112,102,0.18);transform:translateY(-2px);box-shadow:0 0 0 3px rgba(249,112,102,0.25)}
     @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}60%{transform:translateX(6px)}}
     @keyframes pairFlash{0%{background:rgba(110,231,183,0.35)}100%{background:rgba(110,231,183,0.08)}}
     .match-tile.just-matched{animation:pairFlash 0.5s ease forwards}
@@ -231,7 +248,7 @@
     .fitb-btn{font-size:13px;font-weight:500;padding:8px 22px;border-radius:999px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:all 0.18s;font-family:'DM Sans',sans-serif}
     .fitb-btn:hover{background:var(--surface);border-color:var(--accent2)}
     .fitb-btn.primary{border-color:transparent;color:#fff}
-    .page-bio .fitb-btn.primary{background:linear-gradient(135deg,#60a5fa,#2563eb)}
+    .page-bio .fitb-btn.primary{background:linear-gradient(135deg,#f97066,#e85d52)}
     .page-eng .fitb-btn.primary{background:linear-gradient(135deg,#a78bfa,#7c5cbf)}
     .fitb-btn:disabled{opacity:0.35;cursor:default}
     .fitb-progress-row{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
@@ -259,10 +276,11 @@
 
 <!-- TOP NAV -->
 <nav class="topnav">
-  <div class="topnav-brand" onclick="showPage('home')">📚 Grade 9 Study Hub</div>
+  <div class="topnav-brand" onclick="showPage(&#39;home&#39;)">📚 Grade 9 Study Hub</div>
   <div class="topnav-tabs">
     <button class="topnav-tab" id="nav-eng" onclick="showPage('eng')">📖 English</button>
     <button class="topnav-tab" id="nav-bio" onclick="showPage('bio')">🧬 Biology</button>
+    <button class="topnav-tab" id="nav-fr" onclick="showPage('fr')"><svg width="18" height="13" viewBox="0 0 18 13" style="border-radius:2px;vertical-align:middle;margin-right:5px" xmlns="http://www.w3.org/2000/svg"><rect width="6" height="13" fill="#002395"/><rect x="6" width="6" height="13" fill="#fff"/><rect x="12" width="6" height="13" fill="#ED2939"/></svg>French</button>
   </div>
 </nav>
 
@@ -276,7 +294,7 @@
     <p class="home-sub">Pick a subject to get started. Flashcards, matching, and fill-in-the-blank — all in one place.</p>
   </div>
   <div class="subject-cards">
-    <div class="subject-card eng" onclick="showPage('eng')">
+    <div class="subject-card eng" onclick="showPage(&#39;eng&#39;)">
       <span class="sc-arrow">↗</span>
       <div class="sc-icon">📖</div>
       <div class="sc-title eng">English</div>
@@ -291,7 +309,18 @@
       <span class="sc-arrow">↗</span>
       <div class="sc-icon">🧬</div>
       <div class="sc-title bio">Biology</div>
-      <div class="sc-desc">Gene expression, cell division, genetics, pedigrees, and inheritance. 59 cards.</div>
+      <div class="sc-desc">Gene expression, cell division, genetics, pedigrees, and inheritance. 83 cards.</div>
+      <div class="sc-tags">
+        <span class="sc-tag">🃏 Flashcards</span>
+        <span class="sc-tag">🔗 Match</span>
+        <span class="sc-tag">✏️ Fill in the Blank</span>
+      </div>
+    </div>
+    <div class="subject-card fr" onclick="showPage('fr')">
+      <span class="sc-arrow">↗</span>
+      <div class="sc-icon"><svg width="36" height="26" viewBox="0 0 36 26" style="border-radius:3px" xmlns="http://www.w3.org/2000/svg"><rect width="12" height="26" fill="#002395"/><rect x="12" width="12" height="26" fill="#fff"/><rect x="24" width="12" height="26" fill="#ED2939"/></svg></div>
+      <div class="sc-title fr">French</div>
+      <div class="sc-desc">Passé composé avec avoir, hotel &amp; restaurant vocabulary, and dialogue writing. 40 cards.</div>
       <div class="sc-tags">
         <span class="sc-tag">🃏 Flashcards</span>
         <span class="sc-tag">🔗 Match</span>
@@ -309,42 +338,42 @@
   <header class="subj-header">
     <div class="subj-eyebrow">Study Tool</div>
     <h1 class="subj-h1">Grade 9 English</h1>
-    <p class="subj-sub">The Bitter Side of Sweet &amp; Poetry Terms &middot; 51 cards</p>
+    <p class="subj-sub">The Bitter Side of Sweet &amp; Poetry Terms · 51 cards</p>
   </header>
   <div class="mode-switcher">
-    <button class="mode-btn active" id="eng-btn-flash" onclick="engSwitchMode('flash')">🃏 Flashcards</button>
-    <button class="mode-btn" id="eng-btn-match" onclick="engSwitchMode('match')">🔗 Match</button>
-    <button class="mode-btn" id="eng-btn-fitb" onclick="engSwitchMode('fitb')">✏️ Fill in the Blank</button>
+    <button class="mode-btn active" id="eng-btn-flash" onclick="engSwitchMode(&#39;flash&#39;)">🃏 Flashcards</button>
+    <button class="mode-btn" id="eng-btn-match" onclick="engSwitchMode(&#39;match&#39;)">🔗 Match</button>
+    <button class="mode-btn" id="eng-btn-fitb" onclick="engSwitchMode(&#39;fitb&#39;)">✏️ Fill in the Blank</button>
   </div>
 
   <!-- ENG FLASHCARD SCREEN -->
   <div class="screen visible" id="eng-screen-flash">
     <div class="toolbar">
-      <div class="tabs" id="eng-tabs"></div>
+      <div class="tabs" id="eng-tabs"><button class="tab active" onclick="engSetActive(&#39;All&#39;)"> All</button><button class="tab" onclick="engSetActive(&#39;Poetry Terms&#39;)"> Poetry Terms</button><button class="tab" onclick="engSetActive(&#39;Poetic Structure&#39;)"> Poetic Structure</button><button class="tab" onclick="engSetActive(&#39;Plot&#39;)"> Plot</button><button class="tab" onclick="engSetActive(&#39;Characters&#39;)"> Characters</button><button class="tab" onclick="engSetActive(&#39;Themes&#39;)"> Themes</button><button class="tab" onclick="engSetActive(&#39;Final Review&#39;)"> Final Review</button></div>
       <div class="right-tools">
         <button class="shuffle-btn" onclick="engShuffle()">⇄ Shuffle</button>
-        <span class="progress" id="eng-prog"></span>
+        <span class="progress" id="eng-prog">1 / 51</span>
       </div>
     </div>
     <div class="card-area">
       <div class="card-wrap" id="eng-card" onclick="engFlip()">
         <div class="card-face front">
           <div class="card-label">Question</div>
-          <div class="card-q" id="eng-q-text"></div>
-          <div class="card-category" id="eng-q-cat"></div>
+          <div class="card-q" id="eng-q-text">What is a theme in a poem?</div>
+          <div class="card-category" id="eng-q-cat">Poetry Terms</div>
         </div>
         <div class="card-face back">
           <div class="card-label">Answer</div>
-          <div class="card-a" id="eng-a-text"></div>
+          <div class="card-a" id="eng-a-text">The central message or insight about life that a poem communicates. It goes beyond the topic: not just 'war' but what the poet says about war.</div>
         </div>
       </div>
     </div>
-    <p class="flip-hint">Tap to flip <span>&middot;</span> &larr; &rarr; arrow keys <span>&middot;</span> Space to flip</p>
+    <p class="flip-hint">Tap to flip <span>·</span> ← → arrow keys <span>·</span> Space to flip</p>
     <div class="nav-row">
-      <button class="nav-btn" id="eng-prev-btn" onclick="engGo(-1)">&larr; Prev</button>
-      <button class="nav-btn" id="eng-next-btn" onclick="engGo(1)">Next &rarr;</button>
+      <button class="nav-btn" id="eng-prev-btn" onclick="engGo(-1)" disabled="">← Prev</button>
+      <button class="nav-btn" id="eng-next-btn" onclick="engGo(1)">Next →</button>
     </div>
-    <div class="dot-row" id="eng-dots"></div>
+    <div class="dot-row" id="eng-dots"><div class="dot current" onclick="engJumpTo(0)" title="Card 1"></div><div class="dot" onclick="engJumpTo(1)" title="Card 2"></div><div class="dot" onclick="engJumpTo(2)" title="Card 3"></div><div class="dot" onclick="engJumpTo(3)" title="Card 4"></div><div class="dot" onclick="engJumpTo(4)" title="Card 5"></div><div class="dot" onclick="engJumpTo(5)" title="Card 6"></div><div class="dot" onclick="engJumpTo(6)" title="Card 7"></div><div class="dot" onclick="engJumpTo(7)" title="Card 8"></div><div class="dot" onclick="engJumpTo(8)" title="Card 9"></div><div class="dot" onclick="engJumpTo(9)" title="Card 10"></div><div class="dot" onclick="engJumpTo(10)" title="Card 11"></div><div class="dot" onclick="engJumpTo(11)" title="Card 12"></div><div class="dot" onclick="engJumpTo(12)" title="Card 13"></div><div class="dot" onclick="engJumpTo(13)" title="Card 14"></div><div class="dot" onclick="engJumpTo(14)" title="Card 15"></div><div class="dot" onclick="engJumpTo(15)" title="Card 16"></div><div class="dot" onclick="engJumpTo(16)" title="Card 17"></div><div class="dot" onclick="engJumpTo(17)" title="Card 18"></div><div class="dot" onclick="engJumpTo(18)" title="Card 19"></div><div class="dot" onclick="engJumpTo(19)" title="Card 20"></div><div class="dot" onclick="engJumpTo(20)" title="Card 21"></div><div class="dot" onclick="engJumpTo(21)" title="Card 22"></div><div class="dot" onclick="engJumpTo(22)" title="Card 23"></div><div class="dot" onclick="engJumpTo(23)" title="Card 24"></div><div class="dot" onclick="engJumpTo(24)" title="Card 25"></div><div class="dot" onclick="engJumpTo(25)" title="Card 26"></div><div class="dot" onclick="engJumpTo(26)" title="Card 27"></div><div class="dot" onclick="engJumpTo(27)" title="Card 28"></div><div class="dot" onclick="engJumpTo(28)" title="Card 29"></div><div class="dot" onclick="engJumpTo(29)" title="Card 30"></div><div class="dot" onclick="engJumpTo(30)" title="Card 31"></div><div class="dot" onclick="engJumpTo(31)" title="Card 32"></div><div class="dot" onclick="engJumpTo(32)" title="Card 33"></div><div class="dot" onclick="engJumpTo(33)" title="Card 34"></div><div class="dot" onclick="engJumpTo(34)" title="Card 35"></div><div class="dot" onclick="engJumpTo(35)" title="Card 36"></div><div class="dot" onclick="engJumpTo(36)" title="Card 37"></div><div class="dot" onclick="engJumpTo(37)" title="Card 38"></div><div class="dot" onclick="engJumpTo(38)" title="Card 39"></div><div class="dot" onclick="engJumpTo(39)" title="Card 40"></div><div class="dot" onclick="engJumpTo(40)" title="Card 41"></div><div class="dot" onclick="engJumpTo(41)" title="Card 42"></div><div class="dot" onclick="engJumpTo(42)" title="Card 43"></div><div class="dot" onclick="engJumpTo(43)" title="Card 44"></div><div class="dot" onclick="engJumpTo(44)" title="Card 45"></div><div class="dot" onclick="engJumpTo(45)" title="Card 46"></div><div class="dot" onclick="engJumpTo(46)" title="Card 47"></div><div class="dot" onclick="engJumpTo(47)" title="Card 48"></div><div class="dot" onclick="engJumpTo(48)" title="Card 49"></div><div class="dot" onclick="engJumpTo(49)" title="Card 50"></div><div class="dot" onclick="engJumpTo(50)" title="Card 51"></div></div>
     <div class="done-banner" id="eng-done">
       <h3>🎉 Deck complete!</h3>
       <p>You've gone through all the cards. Shuffle for another round.</p>
@@ -354,7 +383,7 @@
   <!-- ENG MATCH SCREEN -->
   <div class="screen" id="eng-screen-match">
     <div class="match-header">
-      <div class="match-meta"><strong id="eng-match-score">0</strong> / <strong id="eng-match-total">6</strong> matched &nbsp;&middot;&nbsp; <strong id="eng-match-mistakes">0</strong> mistakes</div>
+      <div class="match-meta"><strong id="eng-match-score">0</strong> / <strong id="eng-match-total">6</strong> matched &nbsp;·&nbsp; <strong id="eng-match-mistakes">0</strong> mistakes</div>
       <button class="match-new-btn" onclick="engNewMatchRound()">↻ New round</button>
     </div>
     <p class="match-instructions">Pick a term, then its matching definition</p>
@@ -379,7 +408,7 @@
   <!-- ENG FITB SCREEN -->
   <div class="screen" id="eng-screen-fitb">
     <div class="fitb-header">
-      <div class="fitb-meta">Question <strong id="eng-fitb-idx">1</strong> of <strong id="eng-fitb-total">10</strong> &nbsp;&middot;&nbsp; <strong id="eng-fitb-correct">0</strong> correct</div>
+      <div class="fitb-meta">Question <strong id="eng-fitb-idx">1</strong> of <strong id="eng-fitb-total">10</strong> &nbsp;·&nbsp; <strong id="eng-fitb-correct">0</strong> correct</div>
       <button class="fitb-new-btn" onclick="engNewFitbRound()">↻ New round</button>
     </div>
     <div class="fitb-progress-row" id="eng-fitb-pips"></div>
@@ -394,7 +423,7 @@
     <div class="fitb-feedback" id="eng-fitb-feedback"></div>
     <div class="fitb-actions">
       <button class="fitb-btn" id="eng-fitb-hint-btn" onclick="engFitbHint()">💡 Hint</button>
-      <button class="fitb-btn primary" id="eng-fitb-next-btn" onclick="engFitbNext()" disabled>Next →</button>
+      <button class="fitb-btn primary" id="eng-fitb-next-btn" onclick="engFitbNext()" disabled="">Next →</button>
     </div>
     <div class="fitb-complete" id="eng-fitb-complete">
       <div class="stars" id="eng-fitb-stars"></div>
@@ -412,42 +441,42 @@
   <header class="subj-header">
     <div class="subj-eyebrow">Study Tool</div>
     <h1 class="subj-h1">Grade 9 Biology</h1>
-    <p class="subj-sub">Genetics: Gene Expression, Cell Division &amp; Inheritance &middot; 59 cards</p>
+    <p class="subj-sub">Genetics: Gene Expression, Cell Division &amp; Inheritance · 83 cards</p>
   </header>
   <div class="mode-switcher">
-    <button class="mode-btn active" id="bio-btn-flash" onclick="bioSwitchMode('flash')">🃏 Flashcards</button>
-    <button class="mode-btn" id="bio-btn-match" onclick="bioSwitchMode('match')">🔗 Match</button>
-    <button class="mode-btn" id="bio-btn-fitb" onclick="bioSwitchMode('fitb')">✏️ Fill in the Blank</button>
+    <button class="mode-btn active" id="bio-btn-flash" onclick="bioSwitchMode(&#39;flash&#39;)">🃏 Flashcards</button>
+    <button class="mode-btn" id="bio-btn-match" onclick="bioSwitchMode(&#39;match&#39;)">🔗 Match</button>
+    <button class="mode-btn" id="bio-btn-fitb" onclick="bioSwitchMode(&#39;fitb&#39;)">✏️ Fill in the Blank</button>
   </div>
 
   <!-- BIO FLASHCARD SCREEN -->
   <div class="screen visible" id="bio-screen-flash">
     <div class="toolbar">
-      <div class="tabs" id="bio-tabs"></div>
+      <div class="tabs" id="bio-tabs"><button class="tab active" onclick="bioSetActive(&#39;All&#39;)"> All</button><button class="tab" onclick="bioSetActive(&#39;Gene Expression&#39;)"> Gene Expression</button><button class="tab" onclick="bioSetActive(&#39;Mutations&#39;)"> Mutations</button><button class="tab" onclick="bioSetActive(&#39;Chromosomes&#39;)"> Chromosomes</button><button class="tab" onclick="bioSetActive(&#39;Mitosis&#39;)"> Mitosis</button><button class="tab" onclick="bioSetActive(&#39;Meiosis&#39;)"> Meiosis</button><button class="tab" onclick="bioSetActive(&#39;Mitosis vs Meiosis&#39;)"> Mitosis vs Meiosis</button><button class="tab" onclick="bioSetActive(&#39;Genetics Vocab&#39;)"> Genetics Vocab</button><button class="tab" onclick="bioSetActive(&#39;Punnett Squares&#39;)"> Punnett Squares</button><button class="tab" onclick="bioSetActive(&#39;Pedigrees&#39;)"> Pedigrees</button><button class="tab" onclick="bioSetActive(&#39;DMD &amp; X-Linked&#39;)"> DMD &amp; X-Linked</button></div>
       <div class="right-tools">
         <button class="shuffle-btn" onclick="bioShuffle()">⇄ Shuffle</button>
-        <span class="progress" id="bio-prog"></span>
+        <span class="progress" id="bio-prog">1 / 83</span>
       </div>
     </div>
     <div class="card-area">
       <div class="card-wrap" id="bio-card" onclick="bioFlip()">
         <div class="card-face front">
           <div class="card-label">Question</div>
-          <div class="card-q" id="bio-q-text"></div>
-          <div class="card-category" id="bio-q-cat"></div>
+          <div class="card-q" id="bio-q-text">What is gene expression (protein synthesis)?</div>
+          <div class="card-category" id="bio-q-cat">Gene Expression</div>
         </div>
         <div class="card-face back">
           <div class="card-label">Answer</div>
-          <div class="card-a" id="bio-a-text"></div>
+          <div class="card-a" id="bio-a-text">The process by which the information encoded in a gene (DNA) is used to make a protein. It has two main stages: transcription and translation.</div>
         </div>
       </div>
     </div>
-    <p class="flip-hint">Tap to flip <span>&middot;</span> &larr; &rarr; arrow keys <span>&middot;</span> Space to flip</p>
+    <p class="flip-hint">Tap to flip <span>·</span> ← → arrow keys <span>·</span> Space to flip</p>
     <div class="nav-row">
-      <button class="nav-btn" id="bio-prev-btn" onclick="bioGo(-1)">&larr; Prev</button>
-      <button class="nav-btn" id="bio-next-btn" onclick="bioGo(1)">Next &rarr;</button>
+      <button class="nav-btn" id="bio-prev-btn" onclick="bioGo(-1)" disabled="">← Prev</button>
+      <button class="nav-btn" id="bio-next-btn" onclick="bioGo(1)">Next →</button>
     </div>
-    <div class="dot-row" id="bio-dots"></div>
+    <div class="dot-row" id="bio-dots"><div class="dot current" onclick="bioJumpTo(0)" title="Card 1"></div><div class="dot" onclick="bioJumpTo(1)" title="Card 2"></div><div class="dot" onclick="bioJumpTo(2)" title="Card 3"></div><div class="dot" onclick="bioJumpTo(3)" title="Card 4"></div><div class="dot" onclick="bioJumpTo(4)" title="Card 5"></div><div class="dot" onclick="bioJumpTo(5)" title="Card 6"></div><div class="dot" onclick="bioJumpTo(6)" title="Card 7"></div><div class="dot" onclick="bioJumpTo(7)" title="Card 8"></div><div class="dot" onclick="bioJumpTo(8)" title="Card 9"></div><div class="dot" onclick="bioJumpTo(9)" title="Card 10"></div><div class="dot" onclick="bioJumpTo(10)" title="Card 11"></div><div class="dot" onclick="bioJumpTo(11)" title="Card 12"></div><div class="dot" onclick="bioJumpTo(12)" title="Card 13"></div><div class="dot" onclick="bioJumpTo(13)" title="Card 14"></div><div class="dot" onclick="bioJumpTo(14)" title="Card 15"></div><div class="dot" onclick="bioJumpTo(15)" title="Card 16"></div><div class="dot" onclick="bioJumpTo(16)" title="Card 17"></div><div class="dot" onclick="bioJumpTo(17)" title="Card 18"></div><div class="dot" onclick="bioJumpTo(18)" title="Card 19"></div><div class="dot" onclick="bioJumpTo(19)" title="Card 20"></div><div class="dot" onclick="bioJumpTo(20)" title="Card 21"></div><div class="dot" onclick="bioJumpTo(21)" title="Card 22"></div><div class="dot" onclick="bioJumpTo(22)" title="Card 23"></div><div class="dot" onclick="bioJumpTo(23)" title="Card 24"></div><div class="dot" onclick="bioJumpTo(24)" title="Card 25"></div><div class="dot" onclick="bioJumpTo(25)" title="Card 26"></div><div class="dot" onclick="bioJumpTo(26)" title="Card 27"></div><div class="dot" onclick="bioJumpTo(27)" title="Card 28"></div><div class="dot" onclick="bioJumpTo(28)" title="Card 29"></div><div class="dot" onclick="bioJumpTo(29)" title="Card 30"></div><div class="dot" onclick="bioJumpTo(30)" title="Card 31"></div><div class="dot" onclick="bioJumpTo(31)" title="Card 32"></div><div class="dot" onclick="bioJumpTo(32)" title="Card 33"></div><div class="dot" onclick="bioJumpTo(33)" title="Card 34"></div><div class="dot" onclick="bioJumpTo(34)" title="Card 35"></div><div class="dot" onclick="bioJumpTo(35)" title="Card 36"></div><div class="dot" onclick="bioJumpTo(36)" title="Card 37"></div><div class="dot" onclick="bioJumpTo(37)" title="Card 38"></div><div class="dot" onclick="bioJumpTo(38)" title="Card 39"></div><div class="dot" onclick="bioJumpTo(39)" title="Card 40"></div><div class="dot" onclick="bioJumpTo(40)" title="Card 41"></div><div class="dot" onclick="bioJumpTo(41)" title="Card 42"></div><div class="dot" onclick="bioJumpTo(42)" title="Card 43"></div><div class="dot" onclick="bioJumpTo(43)" title="Card 44"></div><div class="dot" onclick="bioJumpTo(44)" title="Card 45"></div><div class="dot" onclick="bioJumpTo(45)" title="Card 46"></div><div class="dot" onclick="bioJumpTo(46)" title="Card 47"></div><div class="dot" onclick="bioJumpTo(47)" title="Card 48"></div><div class="dot" onclick="bioJumpTo(48)" title="Card 49"></div><div class="dot" onclick="bioJumpTo(49)" title="Card 50"></div><div class="dot" onclick="bioJumpTo(50)" title="Card 51"></div><div class="dot" onclick="bioJumpTo(51)" title="Card 52"></div><div class="dot" onclick="bioJumpTo(52)" title="Card 53"></div><div class="dot" onclick="bioJumpTo(53)" title="Card 54"></div><div class="dot" onclick="bioJumpTo(54)" title="Card 55"></div><div class="dot" onclick="bioJumpTo(55)" title="Card 56"></div><div class="dot" onclick="bioJumpTo(56)" title="Card 57"></div><div class="dot" onclick="bioJumpTo(57)" title="Card 58"></div><div class="dot" onclick="bioJumpTo(58)" title="Card 59"></div></div>
     <div class="done-banner" id="bio-done">
       <h3>🎉 Deck complete!</h3>
       <p>You've gone through all the cards. Shuffle for another round.</p>
@@ -457,7 +486,7 @@
   <!-- BIO MATCH SCREEN -->
   <div class="screen" id="bio-screen-match">
     <div class="match-header">
-      <div class="match-meta"><strong id="bio-match-score">0</strong> / <strong id="bio-match-total">6</strong> matched &nbsp;&middot;&nbsp; <strong id="bio-match-mistakes">0</strong> mistakes</div>
+      <div class="match-meta"><strong id="bio-match-score">0</strong> / <strong id="bio-match-total">6</strong> matched &nbsp;·&nbsp; <strong id="bio-match-mistakes">0</strong> mistakes</div>
       <button class="match-new-btn" onclick="bioNewMatchRound()">↻ New round</button>
     </div>
     <p class="match-instructions">Pick a term, then its matching definition</p>
@@ -482,7 +511,7 @@
   <!-- BIO FITB SCREEN -->
   <div class="screen" id="bio-screen-fitb">
     <div class="fitb-header">
-      <div class="fitb-meta">Question <strong id="bio-fitb-idx">1</strong> of <strong id="bio-fitb-total">10</strong> &nbsp;&middot;&nbsp; <strong id="bio-fitb-correct">0</strong> correct</div>
+      <div class="fitb-meta">Question <strong id="bio-fitb-idx">1</strong> of <strong id="bio-fitb-total">10</strong> &nbsp;·&nbsp; <strong id="bio-fitb-correct">0</strong> correct</div>
       <button class="fitb-new-btn" onclick="bioNewFitbRound()">↻ New round</button>
     </div>
     <div class="fitb-progress-row" id="bio-fitb-pips"></div>
@@ -497,7 +526,7 @@
     <div class="fitb-feedback" id="bio-fitb-feedback"></div>
     <div class="fitb-actions">
       <button class="fitb-btn" id="bio-fitb-hint-btn" onclick="bioFitbHint()">💡 Hint</button>
-      <button class="fitb-btn primary" id="bio-fitb-next-btn" onclick="bioFitbNext()" disabled>Next →</button>
+      <button class="fitb-btn primary" id="bio-fitb-next-btn" onclick="bioFitbNext()" disabled="">Next →</button>
     </div>
     <div class="fitb-complete" id="bio-fitb-complete">
       <div class="stars" id="bio-fitb-stars"></div>
@@ -508,15 +537,118 @@
   </div>
 </div><!-- /page-bio -->
 
+<!-- ══════════════════════════════════════
+     FRENCH PAGE
+══════════════════════════════════════ -->
+<div class="page page-fr" id="page-fr">
+  <header class="subj-header">
+    <div class="subj-eyebrow">Study Tool</div>
+    <h1 class="subj-h1">Grade 9 French</h1>
+    <p class="subj-sub">Passé Composé, Hotel &amp; Restaurant Vocab · 40 cards</p>
+  </header>
+  <div class="mode-switcher">
+    <button class="mode-btn active" id="fr-btn-flash" onclick="frSwitchMode('flash')">🃏 Flashcards</button>
+    <button class="mode-btn" id="fr-btn-match" onclick="frSwitchMode('match')">🔗 Match</button>
+    <button class="mode-btn" id="fr-btn-fitb" onclick="frSwitchMode('fitb')">✏️ Fill in the Blank</button>
+  </div>
+
+  <!-- FR FLASHCARD SCREEN -->
+  <div class="screen visible" id="fr-screen-flash">
+    <div class="toolbar">
+      <div class="tabs" id="fr-tabs"></div>
+      <div class="right-tools">
+        <button class="shuffle-btn" onclick="frShuffle()">⇄ Shuffle</button>
+        <span class="progress" id="fr-prog">1 / 42</span>
+      </div>
+    </div>
+    <div class="card-area">
+      <div class="card-wrap" id="fr-card" onclick="frFlip()">
+        <div class="card-face front">
+          <div class="card-label">Question</div>
+          <div class="card-q" id="fr-q-text"></div>
+          <div class="card-category" id="fr-q-cat"></div>
+        </div>
+        <div class="card-face back">
+          <div class="card-label">Answer</div>
+          <div class="card-a" id="fr-a-text"></div>
+        </div>
+      </div>
+    </div>
+    <p class="flip-hint">Tap to flip <span>·</span> ← → arrow keys <span>·</span> Space to flip</p>
+    <div class="nav-row">
+      <button class="nav-btn" id="fr-prev-btn" onclick="frGo(-1)" disabled>← Prev</button>
+      <button class="nav-btn" id="fr-next-btn" onclick="frGo(1)">Next →</button>
+    </div>
+    <div class="dot-row" id="fr-dots"></div>
+    <div class="done-banner" id="fr-done">
+      <h3>🎉 Deck complete!</h3>
+      <p>You've gone through all the cards. Shuffle for another round.</p>
+    </div>
+  </div>
+
+  <!-- FR MATCH SCREEN -->
+  <div class="screen" id="fr-screen-match">
+    <div class="match-header">
+      <div class="match-meta"><strong id="fr-match-score">0</strong> / <strong id="fr-match-total">6</strong> matched &nbsp;·&nbsp; <strong id="fr-match-mistakes">0</strong> mistakes</div>
+      <button class="match-new-btn" onclick="frNewMatchRound()">↻ New round</button>
+    </div>
+    <p class="match-instructions">Pick a term, then its matching definition</p>
+    <div class="match-columns">
+      <div>
+        <div class="match-col-header">Terms</div>
+        <div id="fr-match-terms" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+      <div>
+        <div class="match-col-header">Definitions</div>
+        <div id="fr-match-defs" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+    </div>
+    <div class="match-complete" id="fr-match-complete">
+      <div class="stars" id="fr-match-stars"></div>
+      <h3>All matched!</h3>
+      <p id="fr-match-result-text"></p>
+      <button onclick="frNewMatchRound()">Play again</button>
+    </div>
+  </div>
+
+  <!-- FR FITB SCREEN -->
+  <div class="screen" id="fr-screen-fitb">
+    <div class="fitb-header">
+      <div class="fitb-meta">Question <strong id="fr-fitb-idx">1</strong> of <strong id="fr-fitb-total">10</strong> &nbsp;·&nbsp; <strong id="fr-fitb-correct">0</strong> correct</div>
+      <button class="fitb-new-btn" onclick="frNewFitbRound()">↻ New round</button>
+    </div>
+    <div class="fitb-progress-row" id="fr-fitb-pips"></div>
+    <div class="fitb-card" id="fr-fitb-card">
+      <div class="fitb-topic" id="fr-fitb-topic"></div>
+      <div class="fitb-sentence" id="fr-fitb-sentence"></div>
+    </div>
+    <div class="fitb-word-bank" id="fr-fitb-bank-wrap">
+      <div class="fitb-bank-label">Word bank · <kbd>← →</kbd> navigate &nbsp;·&nbsp; <kbd>Space</kbd> select &nbsp;·&nbsp; <kbd>Tab</kbd> switch blank &nbsp;·&nbsp; <kbd>Enter</kbd> next question</div>
+      <div class="fitb-chips" id="fr-fitb-chips"></div>
+    </div>
+    <div class="fitb-feedback" id="fr-fitb-feedback"></div>
+    <div class="fitb-actions">
+      <button class="fitb-btn" id="fr-fitb-hint-btn" onclick="frFitbHint()">💡 Hint</button>
+      <button class="fitb-btn primary" id="fr-fitb-next-btn" onclick="frFitbNext()" disabled>Next →</button>
+    </div>
+    <div class="fitb-complete" id="fr-fitb-complete">
+      <div class="stars" id="fr-fitb-stars"></div>
+      <h3>Round complete!</h3>
+      <p id="fr-fitb-result-text"></p>
+      <button onclick="frNewFitbRound()">Play again</button>
+    </div>
+  </div>
+</div><!-- /page-fr -->
+
 <script>
 // ══════════════════════════════════════════════════════
 // PAGE NAVIGATION
 // ══════════════════════════════════════════════════════
 function showPage(name){
-  ['home','eng','bio'].forEach(p=>{
+  ['home','eng','bio','fr'].forEach(p=>{
     document.getElementById('page-'+p).classList.toggle('visible',p===name);
   });
-  ['eng','bio'].forEach(n=>{
+  ['eng','bio','fr'].forEach(n=>{
     const el=document.getElementById('nav-'+n);
     el.className='topnav-tab'+(name===n?' active-'+n:'');
   });
@@ -777,6 +909,40 @@ const BIO_ALL=[
   {cat:"DMD & X-Linked",q:"How does the dystrophin mutation cause DMD at the molecular level?",a:"A deletion/mutation in the dystrophin gene → altered mRNA sequence → wrong amino acids assembled → dystrophin protein misfolds → cannot anchor actin to the ECM → muscle cells are damaged during contraction."},
   {cat:"DMD & X-Linked",q:"What is cystic fibrosis and what type of inheritance does it follow?",a:"CF is caused by a mutation in the CFTR gene causing thick mucus in lungs and pancreas. It is autosomal recessive — both parents must carry at least one recessive allele (a) for a child to be affected (aa)."},
   {cat:"DMD & X-Linked",q:"What is Huntington's disease and what type of inheritance does it follow?",a:"HD is autosomal dominant — even one copy of the mutated allele causes the disease. Symptoms appear at age 30–50. Every person who inherits the HD allele will eventually develop the disease."},
+
+  // ── NEW CARDS FROM FINAL EXAM MATERIALS ──
+  // Gene Expression – additional detail
+  {cat:"Gene Expression",q:"What is the anticodon and how does it work?",a:"The anticodon is a 3-letter sequence on a tRNA molecule that is complementary to a codon on the mRNA. It ensures the correct amino acid is brought to the ribosome during translation."},
+  {cat:"Gene Expression",q:"What is a codon?",a:"A codon is a group of 3 consecutive bases (letters) on the mRNA strand. Each codon codes for one specific amino acid. The ribosome reads codons one at a time during translation."},
+  {cat:"Gene Expression",q:"Why is the order of bases in DNA so important?",a:"The sequence of bases (A, T, C, G) in a gene determines the sequence of amino acids in a protein. Even a single base change can alter or destroy the protein's structure and function."},
+  // Mitosis stages detail
+  {cat:"Mitosis",q:"What happens during Prophase of mitosis?",a:"Chromosomes condense and become visible under a microscope. The nuclear membrane begins to break down. Spindle fibres form and attach to chromosomes."},
+  {cat:"Mitosis",q:"What happens during Metaphase of mitosis?",a:"Chromosomes align along the equator (middle) of the cell. Spindle fibres from opposite poles attach to the centromere of each chromosome."},
+  {cat:"Mitosis",q:"What happens during Telophase and cytokinesis?",a:"Nuclear membranes reform around each set of chromosomes at the two poles. Then cytokinesis occurs — the cytoplasm divides, producing two complete daughter cells."},
+  {cat:"Mitosis",q:"Why is it important that sister chromatids separate in anaphase?",a:"Separation ensures each daughter cell receives one complete, identical copy of the genome. If chromatids did not separate properly, daughter cells would have the wrong chromosome number."},
+  // Chromosomes – nondisjunction
+  {cat:"Chromosomes",q:"What is nondisjunction?",a:"Nondisjunction is an error during meiosis where chromosomes fail to separate correctly. The resulting gametes have too many or too few chromosomes. If a gamete with an extra chromosome is fertilised, the zygote will have 47 chromosomes (e.g. Down syndrome = trisomy 21)."},
+  {cat:"Chromosomes",q:"What causes Down syndrome at the chromosomal level?",a:"An extra copy of chromosome 21 (trisomy 21). This results from nondisjunction during meiosis — the chromosome pair 21 fails to separate, so one gamete gets two copies. The fertilised egg then has 3 copies of chromosome 21."},
+  {cat:"Chromosomes",q:"What is the difference between a chromatid and a chromosome?",a:"A chromatid is one single DNA molecule (highly condensed). After replication, a chromosome is made of 2 sister chromatids joined together. When sister chromatids separate in anaphase, each one becomes its own individual chromosome."},
+  // Genetics vocab – extra practice cards
+  {cat:"Genetics Vocab",q:"What is a carrier?",a:"A carrier is a heterozygous individual (Aa) who has one recessive allele but is not affected by the trait. Carriers can pass the recessive allele to their children without showing the trait themselves."},
+  {cat:"Genetics Vocab",q:"What does 'trait is autosomal' mean?",a:"The gene controlling that trait is located on one of the autosomes (chromosomes 1–22). Autosomal traits affect males and females equally because both sexes have the same pairs of autosomes."},
+  {cat:"Genetics Vocab",q:"Why does every person have exactly 2 alleles for each autosomal gene?",a:"Because humans are diploid (2n). Every autosomal gene is present on a pair of homologous chromosomes — one chromosome from mum, one from dad — so each person inherits one allele from each parent."},
+  // Punnett Squares – exam-style worked problems
+  {cat:"Punnett Squares",q:"Free earlobes (E) dominant over attached (e). An Ee father × ee mother. Offspring ratios?",a:"Gametes: father gives E or e; mother gives only e. Offspring: 50% Ee (free earlobes) and 50% ee (attached earlobes). Phenotype ratio: 1 free : 1 attached."},
+  {cat:"Punnett Squares",q:"Two heterozygous parents (Aa × Aa) for an autosomal recessive disease. Probability of an affected child?",a:"Offspring: 25% AA (unaffected), 50% Aa (carrier, unaffected), 25% aa (affected). Probability of affected child = 25%. Important: having 3 healthy children does NOT change the 25% probability for the next child."},
+  {cat:"Punnett Squares",q:"Homozygous hornless bull (HH) × homozygous horned cow (hh). Hornless H is dominant. Offspring?",a:"All offspring are Hh (heterozygous hornless). Genotype: 100% Hh. Phenotype: 100% hornless, because H is dominant over h."},
+  {cat:"Punnett Squares",q:"X-linked recessive cross: carrier mother (X^N X^n) × affected father (X^n Y). Offspring?",a:"Offspring: X^N X^n (carrier female, 25%), X^n X^n (affected female, 25%), X^N Y (normal male, 25%), X^n Y (affected male, 25%). Both sons and daughters can be affected in this cross."},
+  // Pedigrees – reading strategy
+  {cat:"Pedigrees",q:"What are the 3 steps for analysing a pedigree?",a:"Step 1 — Dominant or recessive? (Two unaffected parents with an affected child → recessive.) Step 2 — Autosomal or X-linked? (Affects males >> females → likely X-linked.) Step 3 — Assign genotypes to each individual using the rules from steps 1 and 2."},
+  {cat:"Pedigrees",q:"Both parents in a pedigree are unaffected but have one affected child. What can you conclude?",a:"The trait is recessive. Both parents must be carriers (heterozygous, Aa). They each passed one recessive allele (a) to the affected child (aa), even though they show no symptoms."},
+  {cat:"Pedigrees",q:"What does a half-filled symbol in a pedigree mean?",a:"A half-filled circle or square represents a carrier — an individual who is heterozygous (Aa) for a recessive allele. They are unaffected but can pass the allele to their children."},
+  // X-linked worked example – color blindness
+  {cat:"DMD & X-Linked",q:"Color blindness is X-linked recessive. Carrier mother (X^N X^n) × normal father (X^N Y). Possible children?",a:"Offspring: X^N X^N (normal female, 25%), X^N X^n (carrier female, 25%), X^N Y (normal male, 25%), X^n Y (color-blind male, 25%). So 50% of sons are color-blind; daughters are unaffected."},
+  {cat:"DMD & X-Linked",q:"Why can females be carriers for X-linked recessive traits but males cannot?",a:"Females have two X chromosomes (XX), so a recessive allele on one X can be masked by a dominant allele on the other — the female is a carrier. Males only have one X (XY), so any allele on their single X is expressed — there is no backup copy."},
+  // Albinism – autosomal recessive example
+  {cat:"Genetics Vocab",q:"Albinism is autosomal recessive (aa). Two carrier parents (Aa × Aa). What proportion of children will have albinism?",a:"25% of children will have albinism (aa). 75% will have normal pigmentation (AA or Aa). This is the standard 3:1 dominant-to-recessive phenotype ratio for a heterozygous × heterozygous cross."},
+  {cat:"Genetics Vocab",q:"If a pedigree shows albinism skipping a generation, what type of inheritance is it?",a:"Autosomal recessive. Recessive traits can skip generations because carriers (Aa) are unaffected but can still pass the allele on. Two carrier parents can produce an affected child (aa) even though neither parent shows the trait."},
 ];
 
 const BIO_MATCH_POOL=[
@@ -1273,5 +1439,343 @@ document.addEventListener("keydown",e=>{
   }
 });
 </script>
-</body>
-</html>
+
+<script>
+// ══════════════════════════════════════════════════════
+// FRENCH DATA
+// ══════════════════════════════════════════════════════
+const FR_ALL=[
+  // ── Passé Composé – Formation ──
+  {cat:"Passé Composé",q:"How do you form the passé composé with avoir?",a:"Conjugate avoir in the present tense (j'ai, tu as, il/elle a, nous avons, vous avez, ils/elles ont) + the past participle of the main verb."},
+  {cat:"Passé Composé",q:"How do you form the past participle of -ER verbs?",a:"Remove -ER and add -É. Example: manger → mangé, parler → parlé, regarder → regardé, écouter → écouté."},
+  {cat:"Passé Composé",q:"How do you form the past participle of -IR verbs?",a:"Remove -IR and add -I. Example: finir → fini, choisir → choisi."},
+  {cat:"Passé Composé",q:"How do you form the past participle of -RE verbs?",a:"Remove -RE and add -U. Example: vendre → vendu, répondre → répondu."},
+  {cat:"Passé Composé",q:"What is the passé composé of 'manger' for 'je'?",a:"J'ai mangé. (avoir: j'ai + past participle: mangé)"},
+  {cat:"Passé Composé",q:"What is the passé composé of 'finir' for 'elle'?",a:"Elle a fini. (avoir: elle a + past participle: fini)"},
+  {cat:"Passé Composé",q:"What is the passé composé of 'vendre' for 'nous'?",a:"Nous avons vendu. (avoir: nous avons + past participle: vendu)"},
+  {cat:"Passé Composé",q:"What is the passé composé of 'regarder' for 'ils'?",a:"Ils ont regardé. (avoir: ils ont + past participle: regardé)"},
+  // ── Irregular Past Participles ──
+  {cat:"Irregular Verbs",q:"What is the past participle of 'faire' (to do/make)?",a:"Fait. Example: J'ai fait mes devoirs. (I did my homework.)"},
+  {cat:"Irregular Verbs",q:"What is the past participle of 'avoir' (to have)?",a:"Eu. Example: Tu as eu un nouveau téléphone. (You had a new phone.)"},
+  {cat:"Irregular Verbs",q:"What is the past participle of 'être' (to be)?",a:"Été. Note: être uses avoir as its auxiliary in passé composé. Example: Il a été malade. (He was sick.)"},
+  {cat:"Irregular Verbs",q:"How do you conjugate: 'Je fais mes devoirs' → passé composé?",a:"J'ai fait mes devoirs."},
+  {cat:"Irregular Verbs",q:"How do you conjugate: 'Nous avons une réunion' → passé composé?",a:"Nous avons eu une réunion. (avoir → eu)"},
+  {cat:"Irregular Verbs",q:"How do you conjugate: 'Ils font du sport' → passé composé?",a:"Ils ont fait du sport. (faire → fait)"},
+  // ── Restaurant Vocabulary ──
+  {cat:"Restaurant Vocab",q:"How do you say 'the menu / the bill' in French?",a:"La carte (the menu) · L'addition (the bill/check). 'L'addition, s'il vous plaît!' = The bill, please!"},
+  {cat:"Restaurant Vocab",q:"How do you say 'the waiter / the waitress'?",a:"Le serveur (the waiter) · La serveuse (the waitress)."},
+  {cat:"Restaurant Vocab",q:"How do you say 'a bottle of still/sparkling water'?",a:"Une bouteille d'eau minérale (a bottle of mineral water). Still = plate, sparkling = gazeuse."},
+  {cat:"Restaurant Vocab",q:"How do you order a meal in French? Give an example.",a:"'Je voudrais…' (I would like…) or 'Je prends…' (I'll have…). Example: 'Je voudrais un steak-frites, s'il vous plaît.'"},
+  {cat:"Restaurant Vocab",q:"What is 'the starter / main course / dessert' in French?",a:"L'entrée (starter) · Le plat principal (main course) · Le dessert (dessert)."},
+  {cat:"Restaurant Vocab",q:"What does 'Comme boisson' mean?",a:"'As a drink / for a drink.' Used to specify what you want to drink. Example: Comme boisson, je voudrais du jus d'orange."},
+  {cat:"Restaurant Vocab",q:"Translate: 'C'est délicieux!'",a:"It's delicious! A useful expression to compliment food at a restaurant."},
+  {cat:"Restaurant Vocab",q:"How do you say 'the bill costs 35 euros'?",a:"L'addition coûte 35 euros. · Le dîner coûte 35 euros."},
+  // ── Hotel Dialogue Vocabulary ──
+  {cat:"Hotel Dialogue",q:"How do you ask for a room for one/two people?",a:"'Je voudrais une chambre pour une personne.' (one person) / 'Je voudrais une chambre pour deux personnes.' (two people)"},
+  {cat:"Hotel Dialogue",q:"How do you ask if breakfast is included?",a:"'Le petit-déjeuner est inclus ?' (Is breakfast included?) or 'Est-ce que le petit-déjeuner est compris ?'"},
+  {cat:"Hotel Dialogue",q:"How do you ask about the price of a room?",a:"'Quel est le prix de la chambre ?' (What is the price of the room?) or 'C'est combien par nuit ?' (How much per night?)"},
+  {cat:"Hotel Dialogue",q:"How does a receptionist greet you and ask how they can help?",a:"'Bonjour, bienvenue à l'hôtel. Je peux vous aider ?' (Hello, welcome to the hotel. Can I help you?)"},
+  {cat:"Hotel Dialogue",q:"How do you say 'for how many nights?' in French?",a:"'Pour combien de nuits ?' Example reply: 'Pour trois nuits, s'il vous plaît.' (For three nights, please.)"},
+  {cat:"Hotel Dialogue",q:"How do you say 'here is your key' and 'have a good stay'?",a:"'Voici votre clé.' (Here is your key.) · 'Bonne séjour !' (Have a good stay!)"},
+  {cat:"Hotel Dialogue",q:"What are polite closing phrases for a hotel or restaurant dialogue?",a:"'Merci beaucoup.' (Thank you very much.) · 'Au revoir.' (Goodbye.) · 'Bonne journée !' (Have a good day!)"},
+  {cat:"Hotel Dialogue",q:"How do you say 'a single room / a double room' in French?",a:"Une chambre simple (single room) · Une chambre double (double room) · Une chambre avec deux lits (room with two beds)."},
+  // ── Grammar Practice ──
+  {cat:"Grammar Practice",q:"'Tu joues au football.' → passé composé?",a:"Tu as joué au football."},
+  {cat:"Grammar Practice",q:"'Nous visitons le musée.' → passé composé?",a:"Nous avons visité le musée."},
+  {cat:"Grammar Practice",q:"'Elle écoute de la musique.' → passé composé?",a:"Elle a écouté de la musique."},
+  {cat:"Grammar Practice",q:"'Vous travaillez dans la bibliothèque.' → passé composé?",a:"Vous avez travaillé dans la bibliothèque."},
+  {cat:"Grammar Practice",q:"'Elles préparent le dîner.' → passé composé?",a:"Elles ont préparé le dîner."},
+  {cat:"Grammar Practice",q:"'Il parle avec son professeur.' → passé composé?",a:"Il a parlé avec son professeur."},
+  {cat:"Grammar Practice",q:"'Je mange au restaurant.' → passé composé?",a:"J'ai mangé au restaurant."},
+  {cat:"Grammar Practice",q:"'Ils font une promenade dans le parc.' → passé composé?",a:"Ils ont fait une promenade dans le parc."},
+  {cat:"Grammar Practice",q:"'Nous achetons des fruits au marché.' → passé composé?",a:"Nous avons acheté des fruits au marché."},
+  {cat:"Grammar Practice",q:"'Les élèves regardent un film en classe.' → passé composé?",a:"Les élèves ont regardé un film en classe."},
+];
+
+const FR_MATCH_POOL=[
+  {id:0, term:"J'ai mangé",          def:"I ate / I have eaten (manger → mangé)"},
+  {id:1, term:"Tu as choisi",        def:"You chose / You have chosen (choisir → choisi)"},
+  {id:2, term:"Il a vendu",          def:"He sold / He has sold (vendre → vendu)"},
+  {id:3, term:"Nous avons regardé",  def:"We watched / We have watched (regarder → regardé)"},
+  {id:4, term:"Ils ont fait",        def:"They did / They have done (faire → fait)"},
+  {id:5, term:"Elle a fini",         def:"She finished / She has finished (finir → fini)"},
+  {id:6, term:"Vous avez eu",        def:"You had / You have had (avoir → eu)"},
+  {id:7, term:"La carte",            def:"The menu (in a restaurant)"},
+  {id:8, term:"L'addition",          def:"The bill / the check (in a restaurant)"},
+  {id:9, term:"Le serveur",          def:"The waiter"},
+  {id:10,term:"Comme boisson",       def:"As a drink / for a drink"},
+  {id:11,term:"Une chambre pour deux",def:"A room for two people"},
+  {id:12,term:"Le petit-déjeuner est inclus ?", def:"Is breakfast included?"},
+  {id:13,term:"Merci beaucoup",      def:"Thank you very much"},
+  {id:14,term:"Au revoir",           def:"Goodbye"},
+  {id:15,term:"-ER verb past participle",def:"Remove -ER, add -É (e.g. parler → parlé)"},
+  {id:16,term:"-IR verb past participle",def:"Remove -IR, add -I (e.g. finir → fini)"},
+  {id:17,term:"-RE verb past participle",def:"Remove -RE, add -U (e.g. vendre → vendu)"},
+  {id:18,term:"Je voudrais...",      def:"I would like... (polite ordering phrase)"},
+  {id:19,term:"C'est délicieux !",   def:"It's delicious!"},
+];
+
+const FR_FITB_BANK=[
+  {topic:"Passé Composé Formation",sentence:"To form the passé composé with avoir, use {{avoir}} in the present tense + the {{past participle}} of the main verb.",answers:["avoir","past participle"],distractors:["être","infinitive","mRNA","tense"]},
+  {topic:"Passé Composé – -ER verbs",sentence:"For -ER verbs, remove -ER and add {{-É}} to form the past participle. For example, manger becomes {{mangé}} and parler becomes {{parlé}}.",answers:["-É","mangé","parlé"],distractors:["-I","-U","parlé","fini","vendu"]},
+  {topic:"Passé Composé – -IR / -RE verbs",sentence:"-IR verbs take the ending {{-I}} (finir → fini). -RE verbs take the ending {{-U}} (vendre → vendu).",answers:["-I","-U"],distractors:["-É","-A","-ON"]},
+  {topic:"Irregular Past Participles",sentence:"The verb faire has the irregular past participle {{fait}}. The verb avoir has the irregular past participle {{eu}}.",answers:["fait","eu"],distractors:["fais","avoir","mangé","fini"]},
+  {topic:"Conjugation Practice",sentence:"J'{{ai}} mangé une pizza. Tu {{as}} choisi un t-shirt. Nous {{avons}} vendu notre voiture.",answers:["ai","as","avons"],distractors:["est","ont","avez","sommes"]},
+  {topic:"Conjugation Practice",sentence:"Ils {{ont}} regardé un film. Elle {{a}} fini ses devoirs. Vous {{avez}} travaillé dans la bibliothèque.",answers:["ont","a","avez"],distractors:["ai","as","avons","est"]},
+  {topic:"Restaurant Vocabulary",sentence:"Sophie demande {{la carte}} pour choisir son repas. À la fin, elle demande {{l'addition}} pour payer.",answers:["la carte","l'addition"],distractors:["le menu","le ticket","la clé","la chambre"]},
+  {topic:"Restaurant Vocabulary",sentence:"Comme {{boisson}}, ils commandent une bouteille d'{{eau minérale}}. Pour le {{dessert}}, Lucas prend une glace.",answers:["boisson","eau minérale","dessert"],distractors:["plat","entrée","jus","chambre"]},
+  {topic:"Hotel Dialogue",sentence:"Le touriste dit : 'Je voudrais une {{chambre}} pour {{deux}} personnes, s'il vous plaît.'",answers:["chambre","deux"],distractors:["clé","trois","table","une"]},
+  {topic:"Hotel Dialogue",sentence:"'Le {{petit-déjeuner}} est {{inclus}} ?' demande le touriste. La réceptionniste répond : 'Oui, c'est {{compris}} dans le prix.'",answers:["petit-déjeuner","inclus","compris"],distractors:["dîner","exclu","séjour","chambre"]},
+  {topic:"Polite Phrases",sentence:"Pour terminer une conversation polie, on dit '{{Merci}} beaucoup' et '{{Au revoir}}'.",answers:["Merci","Au revoir"],distractors:["Bonjour","S'il vous plaît","Excusez-moi","Bonne nuit"]},
+  {topic:"Passé Composé Practice",sentence:"Je {{fais}} mes devoirs → J'ai {{fait}} mes devoirs. Nous {{avons}} une réunion → Nous avons {{eu}} une réunion.",answers:["fais","fait","avons","eu"],distractors:["faire","faisais","sommes","était"]},
+];
+
+// ── FR FLASHCARD STATE ──
+const FR_CATS=["All",...[...new Set(FR_ALL.map(c=>c.cat))]];
+let frActive="All",frDeck=[],frIdx=0,frFlipped=false;
+function frGetDeck(){return frActive==="All"?[...FR_ALL]:FR_ALL.filter(c=>c.cat===frActive);}
+function frShuffle(){frDeck.sort(()=>Math.random()-0.5);frIdx=0;frFlipped=false;document.getElementById("fr-card").classList.remove("flipped");frRender();}
+function frSetActive(cat){frActive=cat;frDeck=frGetDeck();frIdx=0;frFlipped=false;document.getElementById("fr-card").classList.remove("flipped");frRenderTabs();frRender();}
+function frFlip(){frFlipped=!frFlipped;document.getElementById("fr-card").classList.toggle("flipped",frFlipped);frRender();}
+function frGo(dir){const n=frIdx+dir;if(n<0||n>=frDeck.length)return;frIdx=n;frFlipped=false;document.getElementById("fr-card").classList.remove("flipped");frRender();}
+function frJumpTo(i){frIdx=i;frFlipped=false;document.getElementById("fr-card").classList.remove("flipped");frRender();}
+function frRenderTabs(){
+  const tabsEl=document.getElementById("fr-tabs");
+  tabsEl.innerHTML=FR_CATS.map(c=>`<button class="tab${c===frActive?" active":""}" onclick="frSetActive('${c.replace(/'/g,"\\'")}')"> ${c}</button>`).join("");
+}
+function frRender(){
+  const d=frDeck[frIdx];
+  document.getElementById("fr-q-text").textContent=d.q;
+  document.getElementById("fr-q-cat").textContent=d.cat;
+  document.getElementById("fr-a-text").textContent=d.a;
+  document.getElementById("fr-prog").textContent=`${frIdx+1} / ${frDeck.length}`;
+  document.getElementById("fr-prev-btn").disabled=frIdx===0;
+  document.getElementById("fr-next-btn").disabled=frIdx===frDeck.length-1;
+  document.getElementById("fr-done").classList.toggle("show",frIdx===frDeck.length-1);
+  frRenderDots();
+}
+function frRenderDots(){
+  document.getElementById("fr-dots").innerHTML=frDeck.map((_,i)=>{
+    let cls="dot";
+    if(i<frIdx)cls+=" seen";
+    else if(i===frIdx)cls+=" current";
+    return`<div class="${cls}" onclick="frJumpTo(${i})" title="Card ${i+1}"></div>`;
+  }).join("");
+}
+
+// ── FR MODE SWITCHER ──
+function frSwitchMode(mode){
+  ["flash","match","fitb"].forEach(m=>{
+    document.getElementById(`fr-screen-${m}`).classList.toggle("visible",m===mode);
+    document.getElementById(`fr-btn-${m}`).classList.toggle("active",m===mode);
+  });
+  if(mode==="match")frNewMatchRound();
+  if(mode==="fitb")frNewFitbRound();
+}
+
+// ── FR MATCH ──
+const FR_ROUND_SIZE=6;
+let frMatchSelected=null,frMatchMatched=0,frMatchMistakes=0,frMatchLocked=false;
+function frNewMatchRound(){
+  frMatchSelected=null;frMatchMatched=0;frMatchMistakes=0;frMatchLocked=false;
+  document.getElementById("fr-match-score").textContent=0;
+  document.getElementById("fr-match-mistakes").textContent=0;
+  document.getElementById("fr-match-total").textContent=FR_ROUND_SIZE;
+  document.getElementById("fr-match-complete").classList.remove("show");
+  const pool=[...FR_MATCH_POOL].sort(()=>Math.random()-0.5).slice(0,FR_ROUND_SIZE);
+  const terms=[...pool].sort(()=>Math.random()-0.5);
+  const defs=[...pool].sort(()=>Math.random()-0.5);
+  document.getElementById("fr-match-terms").innerHTML=terms.map(p=>`<div class="match-tile term" data-id="${p.id}" data-type="term" onclick="frMatchClick(this)">${p.term}</div>`).join("");
+  document.getElementById("fr-match-defs").innerHTML=defs.map(p=>`<div class="match-tile" data-id="${p.id}" data-type="def" onclick="frMatchClick(this)">${p.def}</div>`).join("");
+}
+function frMatchClick(el){
+  if(frMatchLocked||el.classList.contains("matched"))return;
+  if(frMatchSelected===el){el.classList.remove("selected");frMatchSelected=null;return;}
+  if(frMatchSelected&&frMatchSelected.dataset.type===el.dataset.type){frMatchSelected.classList.remove("selected");frMatchSelected=el;el.classList.add("selected");return;}
+  if(!frMatchSelected){frMatchSelected=el;el.classList.add("selected");return;}
+  const a=frMatchSelected,b=el;a.classList.remove("selected");frMatchSelected=null;
+  if(a.dataset.id===b.dataset.id){
+    a.classList.add("matched","just-matched");b.classList.add("matched","just-matched");
+    setTimeout(()=>{a.classList.remove("just-matched");b.classList.remove("just-matched");},500);
+    frMatchMatched++;document.getElementById("fr-match-score").textContent=frMatchMatched;
+    if(frMatchMatched===FR_ROUND_SIZE)setTimeout(()=>frShowMatchComplete(),500);
+  }else{
+    frMatchLocked=true;a.classList.add("wrong");b.classList.add("wrong");
+    frMatchMistakes++;document.getElementById("fr-match-mistakes").textContent=frMatchMistakes;
+    setTimeout(()=>{a.classList.remove("wrong");b.classList.remove("wrong");frMatchLocked=false;},600);
+  }
+}
+function frShowMatchComplete(){
+  const stars=frMatchMistakes===0?"🌟🌟🌟":frMatchMistakes<=2?"⭐⭐⭐":frMatchMistakes<=5?"⭐⭐":"⭐";
+  document.getElementById("fr-match-stars").textContent=stars;
+  document.getElementById("fr-match-result-text").textContent=`${FR_ROUND_SIZE} pairs matched with ${frMatchMistakes} mistake${frMatchMistakes!==1?"s":""}. ${frMatchMistakes===0?"Perfect round!":frMatchMistakes<=2?"Très bien !":"Continuez à pratiquer !"}`;
+  document.getElementById("fr-match-complete").classList.add("show");
+}
+
+// ── FR FITB ──
+const FR_FITB_ROUND_SIZE=10;
+let frFitbRound=[],frFitbQIdx=0,frFitbAnswered=false,frFitbBlanks=[],frFitbLastFocused=null,frFitbChipFocus=-1,frFitbCorrectCount=0,frFitbResults=[];
+function frNewFitbRound(){
+  frFitbRound=[...FR_FITB_BANK].sort(()=>Math.random()-0.5).slice(0,FR_FITB_ROUND_SIZE);
+  frFitbQIdx=0;frFitbCorrectCount=0;frFitbResults=new Array(FR_FITB_ROUND_SIZE).fill(null);
+  document.getElementById("fr-fitb-correct").textContent=0;
+  document.getElementById("fr-fitb-total").textContent=FR_FITB_ROUND_SIZE;
+  document.getElementById("fr-fitb-complete").classList.remove("show");
+  frLoadFitbQuestion();
+}
+function frRenderFitbPips(){
+  document.getElementById("fr-fitb-pips").innerHTML=frFitbResults.map((r,i)=>{
+    let cls="fitb-pip";
+    if(r===true)cls+=" done-correct";
+    else if(r===false)cls+=" done-wrong";
+    else if(i===frFitbQIdx)cls+=" active";
+    return`<div class="${cls}"></div>`;
+  }).join("");
+}
+function frLoadFitbQuestion(){
+  if(frFitbQIdx>=frFitbRound.length){frShowFitbComplete();return;}
+  frFitbAnswered=false;frFitbBlanks=[];frFitbLastFocused=null;frFitbChipFocus=-1;
+  document.getElementById("fr-fitb-next-btn").disabled=true;
+  document.getElementById("fr-fitb-hint-btn").disabled=false;
+  document.getElementById("fr-fitb-feedback").textContent="";
+  document.getElementById("fr-fitb-feedback").className="fitb-feedback";
+  document.getElementById("fr-fitb-complete").classList.remove("show");
+  document.getElementById("fr-fitb-idx").textContent=frFitbQIdx+1;
+  frRenderFitbPips();
+  const q=frFitbRound[frFitbQIdx];
+  document.getElementById("fr-fitb-topic").textContent=q.topic;
+  let html=q.sentence,blankIdx=0;
+  html=html.replace(/\{\{([^}]+)\}\}/g,(match,answer)=>{
+    const id=`fr-blank-${blankIdx++}`;
+    const w=Math.max(80,answer.length*11);
+    return`<input class="fitb-blank" id="${id}" data-answer="${answer.toLowerCase()}" style="min-width:${w}px" placeholder="…" autocomplete="off" spellcheck="false" oninput="frFitbTyping()" onkeydown="frFitbKeydown(event)">`;
+  });
+  document.getElementById("fr-fitb-sentence").innerHTML=html;
+  q.answers.forEach((_,i)=>{
+    const el=document.getElementById(`fr-blank-${i}`);
+    frFitbBlanks.push({el,answer:q.answers[i].toLowerCase(),filled:false});
+    el.addEventListener('focus',()=>{frFitbLastFocused=frFitbBlanks[i];});
+  });
+  const bankWords=[...q.answers,...q.distractors].sort(()=>Math.random()-0.5);
+  document.getElementById("fr-fitb-chips").innerHTML=bankWords.map(w=>
+    `<div class="fitb-chip" tabindex="0" data-word="${w}" onclick="frFitbChipClick(this)">${w}</div>`
+  ).join("");
+}
+function frSyncChipUsed(){
+  const usedWords=frFitbBlanks.map(b=>b.el.value.trim().toLowerCase()).filter(Boolean);
+  document.querySelectorAll('#fr-fitb-chips .fitb-chip').forEach(c=>{
+    const word=c.dataset.word.toLowerCase();
+    const usedCount=usedWords.filter(w=>w===word).length;
+    const chipIndex=[...document.querySelectorAll('#fr-fitb-chips .fitb-chip')].filter(x=>x.dataset.word.toLowerCase()===word).indexOf(c);
+    c.classList.toggle('used',chipIndex<usedCount);
+  });
+}
+function frFitbTyping(){
+  frSyncChipUsed();
+  const allFilled=frFitbBlanks.every(b=>b.el.value.trim()!=="");
+  if(allFilled&&!frFitbAnswered)frCheckFitb();
+}
+function frFitbKeydown(e){
+  if(e.key==="Enter"&&!frFitbAnswered)frCheckFitb();
+  if(e.key==="Tab"){
+    const blanks=frFitbBlanks.filter(b=>!b.el.disabled);
+    if(!blanks.length)return;
+    const cur=blanks.findIndex(b=>b===frFitbLastFocused);
+    const next=e.shiftKey?blanks[(cur-1+blanks.length)%blanks.length]:blanks[(cur+1)%blanks.length];
+    e.preventDefault();next.el.focus();
+  }
+}
+function frFitbChipClick(chip){
+  if(chip.classList.contains("used"))return;
+  const target=(frFitbLastFocused&&!frFitbLastFocused.el.disabled)?frFitbLastFocused:frFitbBlanks.find(b=>!b.el.disabled);
+  if(!target)return;
+  target.el.value=chip.dataset.word;
+  frFitbLastFocused=target;frFitbChipFocus=-1;
+  target.el.focus();frFitbTyping();
+}
+function frCheckFitb(){
+  if(frFitbAnswered)return;
+  frFitbAnswered=true;let allCorrect=true;
+  frFitbBlanks.forEach(b=>{
+    const val=b.el.value.trim().toLowerCase();
+    const correct=val===b.answer;
+    b.el.classList.add(correct?"correct":"wrong-ans");
+    b.el.disabled=true;
+    if(!correct){allCorrect=false;b.el.value=b.answer;}
+  });
+  frFitbResults[frFitbQIdx]=allCorrect;
+  if(allCorrect){
+    frFitbCorrectCount++;
+    document.getElementById("fr-fitb-correct").textContent=frFitbCorrectCount;
+    document.getElementById("fr-fitb-feedback").textContent="✓ Correct!";
+    document.getElementById("fr-fitb-feedback").className="fitb-feedback ok";
+  }else{
+    document.getElementById("fr-fitb-feedback").textContent="Not quite — correct answers shown above.";
+    document.getElementById("fr-fitb-feedback").className="fitb-feedback err";
+  }
+  document.getElementById("fr-fitb-next-btn").disabled=false;
+  document.getElementById("fr-fitb-hint-btn").disabled=true;
+  frRenderFitbPips();
+}
+function frFitbHint(){
+  frFitbBlanks.forEach(b=>{
+    if(!b.el.disabled&&b.el.value===""){b.el.value=b.answer[0].toUpperCase();b.el.focus();}
+  });
+  document.getElementById("fr-fitb-feedback").textContent="💡 First letters revealed!";
+  document.getElementById("fr-fitb-feedback").className="fitb-feedback";
+}
+function frFitbNext(){
+  frFitbQIdx++;
+  if(frFitbQIdx>=frFitbRound.length){frShowFitbComplete();return;}
+  frLoadFitbQuestion();
+}
+function frShowFitbComplete(){
+  frRenderFitbPips();
+  const pct=Math.round((frFitbCorrectCount/FR_FITB_ROUND_SIZE)*100);
+  const stars=pct===100?"🌟🌟🌟":pct>=70?"⭐⭐⭐":pct>=40?"⭐⭐":"⭐";
+  document.getElementById("fr-fitb-stars").textContent=stars;
+  document.getElementById("fr-fitb-result-text").textContent=`${frFitbCorrectCount} / ${FR_FITB_ROUND_SIZE} correct (${pct}%). ${pct===100?"Parfait !":pct>=70?"Très bien !":"Continuez à étudier !"}`;
+  document.getElementById("fr-fitb-complete").classList.add("show");
+}
+
+// ── FR KEYBOARD ──
+document.addEventListener("keydown",e=>{
+  const frPageVisible=document.getElementById("page-fr").classList.contains("visible");
+  if(!frPageVisible)return;
+  if(document.getElementById("fr-screen-flash").classList.contains("visible")){
+    if(e.key==="ArrowRight"){e.preventDefault();frGo(1);}
+    else if(e.key==="ArrowLeft"){e.preventDefault();frGo(-1);}
+    else if(e.key===" "){e.preventDefault();frFlip();}
+  }
+  if(document.getElementById("fr-screen-fitb").classList.contains("visible")){
+    const inBlank=document.activeElement&&document.activeElement.classList.contains("fitb-blank");
+    if(inBlank)return;
+    if(e.key==="Enter"&&frFitbAnswered){e.preventDefault();frFitbNext();return;}
+    const chips=[...document.querySelectorAll('#fr-fitb-chips .fitb-chip:not(.used)')];
+    if(!chips.length)return;
+    if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+      e.preventDefault();
+      const cur=chips.findIndex(c=>c===document.activeElement);
+      let next;
+      if(e.key==="ArrowRight")next=chips[(cur+1)%chips.length];
+      else next=chips[(cur-1+chips.length)%chips.length];
+      next.focus();frFitbChipFocus=chips.indexOf(next);
+    }
+    if(e.key===" "&&document.activeElement&&document.activeElement.classList.contains("fitb-chip")){
+      e.preventDefault();frFitbChipClick(document.activeElement);
+    }
+  }
+});
+
+// ── FR INIT ──
+(function initFr(){
+  frDeck=frGetDeck();
+  frRenderTabs();
+  frRender();
+  frNewMatchRound();
+  frNewFitbRound();
+})();
+</script>
+
+
+</body></html>
