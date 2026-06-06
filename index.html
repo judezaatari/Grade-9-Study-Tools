@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 100 100&#39;&gt;&lt;text y=&#39;.9em&#39; font-size=&#39;90&#39;&gt;%F0%9F%93%9A&lt;/text&gt;&lt;/svg&gt;">
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link href="./Grade 9 Study Hub_files/css2" rel="stylesheet">
+  <link href="./Grade 9 Study Hub v10_files/css2" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -278,6 +278,150 @@
     .page-hist .match-tile.selected{border-color:#34d399;background:rgba(52,211,153,0.18);transform:translateY(-2px);box-shadow:0 0 0 3px rgba(52,211,153,0.25)}
     .page-hist .fitb-btn.primary{background:linear-gradient(135deg,#34d399,#059669)}
 
+    /* ── GENERATION LOADING OVERLAY ── */
+    .mine-loading-overlay{
+      position:fixed;inset:0;z-index:999;
+      background:radial-gradient(ellipse at 50% 40%, #0d1535 0%, #06080f 100%);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity 0.4s ease;
+      gap:2rem;padding:2rem;
+    }
+    .mine-loading-overlay.active{opacity:1;pointer-events:all}
+    .mine-loading-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+    .mine-particle{
+      position:absolute;border-radius:50%;opacity:0;
+      animation:mineParticleFloat 4s ease-in-out infinite;
+    }
+    @keyframes mineParticleFloat{
+      0%{opacity:0;transform:translateY(0) scale(0)}
+      20%{opacity:0.6}
+      80%{opacity:0.3}
+      100%{opacity:0;transform:translateY(-120px) scale(1.5)}
+    }
+    .mine-loading-icon{
+      font-size:3.5rem;
+      animation:mineIconPulse 2s ease-in-out infinite;
+      filter:drop-shadow(0 0 24px rgba(99,179,237,0.5));
+    }
+    @keyframes mineIconPulse{
+      0%,100%{transform:scale(1) rotate(-5deg)}
+      50%{transform:scale(1.15) rotate(5deg)}
+    }
+    .mine-loading-title{
+      font-family:'Playfair Display',serif;font-size:clamp(1.4rem,4vw,2rem);
+      font-weight:700;text-align:center;
+      background:linear-gradient(135deg,#f0eee8 30%,#63b3ed 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .mine-loading-subtitle{font-size:13px;color:var(--muted);text-align:center;min-height:20px;transition:all 0.4s}
+    .mine-loading-bar-wrap{width:min(360px,80vw);background:rgba(255,255,255,0.07);border-radius:999px;height:6px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+    .mine-loading-bar{
+      height:100%;border-radius:999px;width:0%;
+      background:linear-gradient(90deg,#3b82f6,#63b3ed,#9a75f8);
+      background-size:200% 100%;
+      transition:width 0.6s cubic-bezier(.4,0,.2,1);
+      animation:mineBarShimmer 1.8s linear infinite;
+    }
+    @keyframes mineBarShimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+    .mine-loading-steps{display:flex;gap:6px;margin-top:0.5rem}
+    .mine-loading-step{
+      width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.1);
+      transition:all 0.4s;
+    }
+    .mine-loading-step.done{background:#63b3ed;box-shadow:0 0 8px rgba(99,179,237,0.6)}
+    .mine-loading-step.active{background:#9a75f8;animation:mineStepPulse 0.8s ease-in-out infinite;box-shadow:0 0 10px rgba(154,117,248,0.7)}
+    @keyframes mineStepPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+
+    /* ── SAVED SETS ── */
+    .mine-saved-section{margin-bottom:1.75rem;animation:fadeDown 0.5s ease both}
+    .mine-saved-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem}
+    .mine-saved-label{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)}
+    .mine-saved-clear-all{font-size:11px;color:var(--red);opacity:0.6;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0}
+    .mine-saved-clear-all:hover{opacity:1}
+    .mine-saved-list{display:flex;flex-direction:column;gap:8px}
+    .mine-saved-item{
+      display:flex;align-items:center;gap:12px;
+      background:var(--surface2);border:1px solid var(--border);border-radius:12px;
+      padding:0.75rem 1rem;cursor:pointer;transition:all 0.18s;
+    }
+    .mine-saved-item:hover{border-color:rgba(99,179,237,0.4);background:rgba(99,179,237,0.06);transform:translateX(3px)}
+    .mine-saved-item-icon{font-size:1.3rem;flex-shrink:0}
+    .mine-saved-item-info{flex:1;min-width:0}
+    .mine-saved-item-title{font-size:13.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .mine-saved-item-meta{font-size:11px;color:var(--muted);margin-top:2px}
+    .mine-saved-item-del{font-size:13px;color:var(--muted);cursor:pointer;padding:4px;flex-shrink:0;transition:color 0.15s;background:none;border:none;font-family:'DM Sans',sans-serif}
+    .mine-saved-item-del:hover{color:var(--red)}
+
+    /* My Study Set colour overrides */
+    .subject-card.mine{background:linear-gradient(145deg,#0d0f18,#0f1120)}
+    .subject-card:hover.mine{box-shadow:0 16px 48px rgba(99,179,237,0.15)}
+    .sc-title.mine{color:#63b3ed}
+    .topnav-tab.active-mine{background:linear-gradient(135deg,rgba(99,179,237,0.25),rgba(154,117,248,0.15));border-color:rgba(99,179,237,0.4);color:#63b3ed}
+    .page-mine{--accent:#63b3ed;--accent2:#9a75f8}
+    .page-mine .subj-eyebrow{color:var(--accent)}
+    .page-mine .subj-h1{background:linear-gradient(135deg,var(--text) 40%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-mine .mode-btn.active{background:linear-gradient(135deg,#63b3ed,#3b82f6)}
+    .page-mine .tab.active{background:#63b3ed;border-color:#63b3ed;color:#0b0d14}
+    .page-mine .card-face.back{background:linear-gradient(145deg,#0e1825,#0c1830)}
+    .page-mine .dot.current{background:var(--accent);width:20px;border-radius:4px}
+    .page-mine .done-banner{background:linear-gradient(135deg,rgba(99,179,237,0.12),rgba(154,117,248,0.12));border:1px solid rgba(99,179,237,0.25)}
+    .page-mine .done-banner h3{color:var(--accent)}
+    .page-mine .match-tile.selected{border-color:#63b3ed;background:rgba(99,179,237,0.18);transform:translateY(-2px);box-shadow:0 0 0 3px rgba(99,179,237,0.25)}
+    .page-mine .fitb-btn.primary{background:linear-gradient(135deg,#63b3ed,#3b82f6)}
+
+    /* Home separator for My Study Set */
+    .home-divider{display:flex;align-items:center;gap:12px;margin:2rem 0 1.25rem;animation:fadeDown 0.6s 0.2s ease both}
+    .home-divider-line{flex:1;height:1px;background:var(--border)}
+    .home-divider-label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);font-weight:500;white-space:nowrap}
+    .mine-home-card{
+      border-radius:var(--radius);border:1px solid rgba(99,179,237,0.2);
+      padding:1.75rem 1.5rem;cursor:pointer;transition:all 0.22s;
+      text-align:left;position:relative;overflow:hidden;
+      background:linear-gradient(145deg,#0d1020,#0c1428);
+      animation:fadeDown 0.6s 0.25s ease both;
+    }
+    .mine-home-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.3s;background:radial-gradient(ellipse at 30% 30%,rgba(99,179,237,0.08),transparent 70%)}
+    .mine-home-card:hover::before{opacity:1}
+    .mine-home-card:hover{transform:translateY(-3px);border-color:rgba(99,179,237,0.38);box-shadow:0 16px 48px rgba(99,179,237,0.12)}
+    .mine-home-card .sc-arrow{position:absolute;top:1.25rem;right:1.25rem;font-size:1rem;color:rgba(255,255,255,0.2);transition:all 0.2s}
+    .mine-home-card:hover .sc-arrow{color:rgba(255,255,255,0.5);transform:translate(2px,-2px)}
+    .mine-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:rgba(99,179,237,0.12);border:1px solid rgba(99,179,237,0.3);color:#63b3ed;margin-bottom:0.75rem}
+
+    /* My Study Set input area */
+    .mine-input-wrap{background:linear-gradient(145deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+    .mine-input-label{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#63b3ed;margin-bottom:0.6rem}
+    .mine-textarea{width:100%;min-height:160px;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;padding:14px 16px;resize:vertical;outline:none;transition:border-color 0.2s;box-sizing:border-box}
+    .mine-textarea:focus{border-color:#63b3ed}
+    .mine-textarea::placeholder{color:var(--muted)}
+    .mine-gen-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:1rem}
+    .mine-char-hint{font-size:11.5px;color:var(--muted)}
+    .mine-upload-row{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+    .mine-upload-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;padding:8px 18px;border-radius:999px;border:1.5px dashed rgba(99,179,237,0.4);background:rgba(99,179,237,0.05);color:#63b3ed;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.18s}
+    .mine-upload-btn:hover{background:rgba(99,179,237,0.12);border-color:rgba(99,179,237,0.7)}
+    .mine-pdf-name{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .mine-pdf-clear{font-size:11px;cursor:pointer;color:var(--red);opacity:0.7;flex-shrink:0}
+    .mine-pdf-clear:hover{opacity:1}
+    .mine-or-divider{font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;flex-shrink:0}
+    .mine-gen-btn{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:10px 28px;border-radius:999px;border:none;background:linear-gradient(135deg,#63b3ed,#3b82f6);color:#0b0d14;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.15s,transform 0.15s}
+    .mine-gen-btn:hover:not(:disabled){opacity:0.88;transform:translateY(-1px)}
+    .mine-gen-btn:disabled{opacity:0.45;cursor:default;transform:none}
+    .mine-gen-spinner{width:16px;height:16px;border:2px solid rgba(11,13,20,0.3);border-top-color:#0b0d14;border-radius:50%;animation:spin 0.7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    /* ── MINE TOAST MODAL ── */
+    .mine-toast-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center}
+    .mine-toast-overlay.open{display:flex}
+    .mine-toast{position:relative;width:min(480px,90vw);border-radius:18px;padding:1.75rem 2rem;box-shadow:0 32px 80px rgba(0,0,0,0.7);animation:lbModalIn 0.25s cubic-bezier(0.34,1.56,0.64,1) both;text-align:center}
+    .mine-toast.err{background:linear-gradient(155deg,#1f0e0e,#1a0a0a);border:1px solid rgba(248,113,113,0.35)}
+    .mine-toast.ok{background:linear-gradient(155deg,#0a1f14,#081a10);border:1px solid rgba(110,231,183,0.35)}
+    .mine-toast-icon{font-size:2rem;margin-bottom:0.6rem}
+    .mine-toast-msg{font-size:14px;line-height:1.6;color:var(--text)}
+    .mine-toast.err .mine-toast-msg{color:#fca5a5}
+    .mine-toast.ok .mine-toast-msg{color:#6ee7b7}
+    .mine-toast-close{margin-top:1.1rem;padding:8px 26px;border-radius:999px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+    .mine-toast.err .mine-toast-close{background:rgba(248,113,113,0.2);color:#fca5a5}
+    .mine-toast.ok .mine-toast-close{background:rgba(110,231,183,0.2);color:#6ee7b7}
+    .mine-status{display:none}
+
     @media(max-width:480px){
       .card-face{padding:1.75rem 1.5rem}
       .toolbar{flex-direction:column;align-items:flex-start}
@@ -343,7 +487,24 @@
     .match-game-area.active{display:block}
   </style>
 </head>
-<body>
+<body data-new-gr-c-s-check-loaded="14.1299.0" data-gr-ext-installed="">
+
+<!-- MINE LOADING OVERLAY -->
+<div class="mine-loading-overlay" id="mine-loading-overlay">
+  <div class="mine-loading-particles" id="mine-loading-particles"></div>
+  <div class="mine-loading-icon">🪄</div>
+  <div class="mine-loading-title">Building your study set…</div>
+  <div class="mine-loading-subtitle" id="mine-loading-subtitle">Reading your content</div>
+  <div class="mine-loading-bar-wrap">
+    <div class="mine-loading-bar" id="mine-loading-bar"></div>
+  </div>
+  <div class="mine-loading-steps" id="mine-loading-steps">
+    <div class="mine-loading-step active" id="mine-step-0"></div>
+    <div class="mine-loading-step" id="mine-step-1"></div>
+    <div class="mine-loading-step" id="mine-step-2"></div>
+    <div class="mine-loading-step" id="mine-step-3"></div>
+  </div>
+</div>
 
 <!-- LEADERBOARD MODAL -->
 <div class="lb-modal-overlay" id="lb-modal-overlay" onclick="if(event.target===this)closeLbModal()">
@@ -357,10 +518,11 @@
 <nav class="topnav">
   <div class="topnav-brand" onclick="showPage(&#39;home&#39;)">📚 Grade 9 Study Hub</div>
   <div class="topnav-tabs">
-    <button class="topnav-tab" id="nav-eng" onclick="showPage('eng')">📖 English</button>
-    <button class="topnav-tab" id="nav-bio" onclick="showPage('bio')">🧬 Biology</button>
-    <button class="topnav-tab" id="nav-fr" onclick="showPage('fr')"><svg width="18" height="13" viewBox="0 0 18 13" style="border-radius:2px;vertical-align:middle;margin-right:5px" xmlns="http://www.w3.org/2000/svg"><rect width="6" height="13" fill="#002395"/><rect x="6" width="6" height="13" fill="#fff"/><rect x="12" width="6" height="13" fill="#ED2939"/></svg>French</button>
-    <button class="topnav-tab" id="nav-hist" onclick="showPage('hist')">🏛️ History</button>
+    <button class="topnav-tab" id="nav-eng" onclick="showPage(&#39;eng&#39;)">📖 English</button>
+    <button class="topnav-tab" id="nav-bio" onclick="showPage(&#39;bio&#39;)">🧬 Biology</button>
+    <button class="topnav-tab" id="nav-fr" onclick="showPage(&#39;fr&#39;)">🇫🇷 French</button>
+    <button class="topnav-tab" id="nav-hist" onclick="showPage(&#39;hist&#39;)">🏛️ History</button>
+    <button class="topnav-tab" id="nav-mine" onclick="showPage(&#39;mine&#39;)">🪄 My Set</button>
   </div>
 </nav>
 
@@ -385,7 +547,7 @@
         <span class="sc-tag">✏️ Fill in the Blank</span>
       </div>
     </div>
-    <div class="subject-card bio" onclick="showPage('bio')">
+    <div class="subject-card bio" onclick="showPage(&#39;bio&#39;)">
       <span class="sc-arrow">↗</span>
       <div class="sc-icon">🧬</div>
       <div class="sc-title bio">Biology</div>
@@ -396,9 +558,9 @@
         <span class="sc-tag">✏️ Fill in the Blank</span>
       </div>
     </div>
-    <div class="subject-card fr" onclick="showPage('fr')">
+    <div class="subject-card fr" onclick="showPage(&#39;fr&#39;)">
       <span class="sc-arrow">↗</span>
-      <div class="sc-icon"><svg width="36" height="26" viewBox="0 0 36 26" style="border-radius:3px" xmlns="http://www.w3.org/2000/svg"><rect width="12" height="26" fill="#002395"/><rect x="12" width="12" height="26" fill="#fff"/><rect x="24" width="12" height="26" fill="#ED2939"/></svg></div>
+      <div class="sc-icon"><svg width="36" height="26" viewBox="0 0 36 26" style="border-radius:3px" xmlns="http://www.w3.org/2000/svg"><rect width="12" height="26" fill="#002395"></rect><rect x="12" width="12" height="26" fill="#fff"></rect><rect x="24" width="12" height="26" fill="#ED2939"></rect></svg></div>
       <div class="sc-title fr">French</div>
       <div class="sc-desc">Passé composé avec avoir, hotel &amp; restaurant vocabulary, and dialogue writing. 57 cards.</div>
       <div class="sc-tags">
@@ -407,7 +569,7 @@
         <span class="sc-tag">✏️ Fill in the Blank</span>
       </div>
     </div>
-    <div class="subject-card hist" onclick="showPage('hist')">
+    <div class="subject-card hist" onclick="showPage(&#39;hist&#39;)">
       <span class="sc-arrow">↗</span>
       <div class="sc-icon">🏛️</div>
       <div class="sc-title hist">History</div>
@@ -417,6 +579,22 @@
         <span class="sc-tag">🔗 Match</span>
         <span class="sc-tag">✏️ Fill in the Blank</span>
       </div>
+    </div>
+  </div>
+  <div class="home-divider">
+    <div class="home-divider-line"></div>
+    <div class="home-divider-label">Your Own Material</div>
+    <div class="home-divider-line"></div>
+  </div>
+  <div class="mine-home-card" onclick="showPage('mine')">
+    <span class="sc-arrow">↗</span>
+    <div class="mine-badge">🪄 AI-Powered</div>
+    <div class="sc-title mine" style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin-bottom:0.3rem">My Study Set</div>
+    <div class="sc-desc" style="font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:1rem">Paste your notes, a paragraph, or a list of terms — get instant flashcards, matching, and fill-in-the-blank. Just for you.</div>
+    <div class="sc-tags">
+      <span class="sc-tag">🃏 Flashcards</span>
+      <span class="sc-tag">🔗 Match</span>
+      <span class="sc-tag">✏️ Fill in the Blank</span>
     </div>
   </div>
   <div class="home-footer">Use the tabs above or click a card to jump into a subject.</div>
@@ -478,7 +656,7 @@
       <p>Match each term to its definition as fast as you can. Your time gets saved to the leaderboard!</p>
       <div class="match-lobby-btns">
         <button class="match-play-btn" onclick="engStartMatch()">▶ Play</button>
-        <button class="lb-btn" onclick="toggleLb('eng')">🏆 Leaderboard</button>
+        <button class="lb-btn" onclick="toggleLb(&#39;eng&#39;)">🏆 Leaderboard</button>
       </div>
     </div>
     <div class="match-game-area" id="eng-match-game">
@@ -486,7 +664,7 @@
         <div class="match-meta"><strong id="eng-match-score">0</strong> / <strong id="eng-match-total">6</strong> matched &nbsp;·&nbsp; <strong id="eng-match-mistakes">0</strong> mistakes</div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <div class="match-timer"><span class="timer-icon">⏱</span><span class="timer-val" id="eng-match-timer">0.0s</span></div>
-          <button class="lb-btn" onclick="toggleLb('eng')">🏆 Leaderboard</button>
+          <button class="lb-btn" onclick="toggleLb(&#39;eng&#39;)">🏆 Leaderboard</button>
           <button class="match-new-btn" onclick="engStartMatch()">↻ New round</button>
         </div>
       </div>
@@ -582,7 +760,7 @@
       <button class="nav-btn" id="bio-prev-btn" onclick="bioGo(-1)" disabled="">← Prev</button>
       <button class="nav-btn" id="bio-next-btn" onclick="bioGo(1)">Next →</button>
     </div>
-    <div class="dot-row" id="bio-dots"><div class="dot current" onclick="bioJumpTo(0)" title="Card 1"></div><div class="dot" onclick="bioJumpTo(1)" title="Card 2"></div><div class="dot" onclick="bioJumpTo(2)" title="Card 3"></div><div class="dot" onclick="bioJumpTo(3)" title="Card 4"></div><div class="dot" onclick="bioJumpTo(4)" title="Card 5"></div><div class="dot" onclick="bioJumpTo(5)" title="Card 6"></div><div class="dot" onclick="bioJumpTo(6)" title="Card 7"></div><div class="dot" onclick="bioJumpTo(7)" title="Card 8"></div><div class="dot" onclick="bioJumpTo(8)" title="Card 9"></div><div class="dot" onclick="bioJumpTo(9)" title="Card 10"></div><div class="dot" onclick="bioJumpTo(10)" title="Card 11"></div><div class="dot" onclick="bioJumpTo(11)" title="Card 12"></div><div class="dot" onclick="bioJumpTo(12)" title="Card 13"></div><div class="dot" onclick="bioJumpTo(13)" title="Card 14"></div><div class="dot" onclick="bioJumpTo(14)" title="Card 15"></div><div class="dot" onclick="bioJumpTo(15)" title="Card 16"></div><div class="dot" onclick="bioJumpTo(16)" title="Card 17"></div><div class="dot" onclick="bioJumpTo(17)" title="Card 18"></div><div class="dot" onclick="bioJumpTo(18)" title="Card 19"></div><div class="dot" onclick="bioJumpTo(19)" title="Card 20"></div><div class="dot" onclick="bioJumpTo(20)" title="Card 21"></div><div class="dot" onclick="bioJumpTo(21)" title="Card 22"></div><div class="dot" onclick="bioJumpTo(22)" title="Card 23"></div><div class="dot" onclick="bioJumpTo(23)" title="Card 24"></div><div class="dot" onclick="bioJumpTo(24)" title="Card 25"></div><div class="dot" onclick="bioJumpTo(25)" title="Card 26"></div><div class="dot" onclick="bioJumpTo(26)" title="Card 27"></div><div class="dot" onclick="bioJumpTo(27)" title="Card 28"></div><div class="dot" onclick="bioJumpTo(28)" title="Card 29"></div><div class="dot" onclick="bioJumpTo(29)" title="Card 30"></div><div class="dot" onclick="bioJumpTo(30)" title="Card 31"></div><div class="dot" onclick="bioJumpTo(31)" title="Card 32"></div><div class="dot" onclick="bioJumpTo(32)" title="Card 33"></div><div class="dot" onclick="bioJumpTo(33)" title="Card 34"></div><div class="dot" onclick="bioJumpTo(34)" title="Card 35"></div><div class="dot" onclick="bioJumpTo(35)" title="Card 36"></div><div class="dot" onclick="bioJumpTo(36)" title="Card 37"></div><div class="dot" onclick="bioJumpTo(37)" title="Card 38"></div><div class="dot" onclick="bioJumpTo(38)" title="Card 39"></div><div class="dot" onclick="bioJumpTo(39)" title="Card 40"></div><div class="dot" onclick="bioJumpTo(40)" title="Card 41"></div><div class="dot" onclick="bioJumpTo(41)" title="Card 42"></div><div class="dot" onclick="bioJumpTo(42)" title="Card 43"></div><div class="dot" onclick="bioJumpTo(43)" title="Card 44"></div><div class="dot" onclick="bioJumpTo(44)" title="Card 45"></div><div class="dot" onclick="bioJumpTo(45)" title="Card 46"></div><div class="dot" onclick="bioJumpTo(46)" title="Card 47"></div><div class="dot" onclick="bioJumpTo(47)" title="Card 48"></div><div class="dot" onclick="bioJumpTo(48)" title="Card 49"></div><div class="dot" onclick="bioJumpTo(49)" title="Card 50"></div><div class="dot" onclick="bioJumpTo(50)" title="Card 51"></div><div class="dot" onclick="bioJumpTo(51)" title="Card 52"></div><div class="dot" onclick="bioJumpTo(52)" title="Card 53"></div><div class="dot" onclick="bioJumpTo(53)" title="Card 54"></div><div class="dot" onclick="bioJumpTo(54)" title="Card 55"></div><div class="dot" onclick="bioJumpTo(55)" title="Card 56"></div><div class="dot" onclick="bioJumpTo(56)" title="Card 57"></div><div class="dot" onclick="bioJumpTo(57)" title="Card 58"></div><div class="dot" onclick="bioJumpTo(58)" title="Card 59"></div></div>
+    <div class="dot-row" id="bio-dots"><div class="dot current" onclick="bioJumpTo(0)" title="Card 1"></div><div class="dot" onclick="bioJumpTo(1)" title="Card 2"></div><div class="dot" onclick="bioJumpTo(2)" title="Card 3"></div><div class="dot" onclick="bioJumpTo(3)" title="Card 4"></div><div class="dot" onclick="bioJumpTo(4)" title="Card 5"></div><div class="dot" onclick="bioJumpTo(5)" title="Card 6"></div><div class="dot" onclick="bioJumpTo(6)" title="Card 7"></div><div class="dot" onclick="bioJumpTo(7)" title="Card 8"></div><div class="dot" onclick="bioJumpTo(8)" title="Card 9"></div><div class="dot" onclick="bioJumpTo(9)" title="Card 10"></div><div class="dot" onclick="bioJumpTo(10)" title="Card 11"></div><div class="dot" onclick="bioJumpTo(11)" title="Card 12"></div><div class="dot" onclick="bioJumpTo(12)" title="Card 13"></div><div class="dot" onclick="bioJumpTo(13)" title="Card 14"></div><div class="dot" onclick="bioJumpTo(14)" title="Card 15"></div><div class="dot" onclick="bioJumpTo(15)" title="Card 16"></div><div class="dot" onclick="bioJumpTo(16)" title="Card 17"></div><div class="dot" onclick="bioJumpTo(17)" title="Card 18"></div><div class="dot" onclick="bioJumpTo(18)" title="Card 19"></div><div class="dot" onclick="bioJumpTo(19)" title="Card 20"></div><div class="dot" onclick="bioJumpTo(20)" title="Card 21"></div><div class="dot" onclick="bioJumpTo(21)" title="Card 22"></div><div class="dot" onclick="bioJumpTo(22)" title="Card 23"></div><div class="dot" onclick="bioJumpTo(23)" title="Card 24"></div><div class="dot" onclick="bioJumpTo(24)" title="Card 25"></div><div class="dot" onclick="bioJumpTo(25)" title="Card 26"></div><div class="dot" onclick="bioJumpTo(26)" title="Card 27"></div><div class="dot" onclick="bioJumpTo(27)" title="Card 28"></div><div class="dot" onclick="bioJumpTo(28)" title="Card 29"></div><div class="dot" onclick="bioJumpTo(29)" title="Card 30"></div><div class="dot" onclick="bioJumpTo(30)" title="Card 31"></div><div class="dot" onclick="bioJumpTo(31)" title="Card 32"></div><div class="dot" onclick="bioJumpTo(32)" title="Card 33"></div><div class="dot" onclick="bioJumpTo(33)" title="Card 34"></div><div class="dot" onclick="bioJumpTo(34)" title="Card 35"></div><div class="dot" onclick="bioJumpTo(35)" title="Card 36"></div><div class="dot" onclick="bioJumpTo(36)" title="Card 37"></div><div class="dot" onclick="bioJumpTo(37)" title="Card 38"></div><div class="dot" onclick="bioJumpTo(38)" title="Card 39"></div><div class="dot" onclick="bioJumpTo(39)" title="Card 40"></div><div class="dot" onclick="bioJumpTo(40)" title="Card 41"></div><div class="dot" onclick="bioJumpTo(41)" title="Card 42"></div><div class="dot" onclick="bioJumpTo(42)" title="Card 43"></div><div class="dot" onclick="bioJumpTo(43)" title="Card 44"></div><div class="dot" onclick="bioJumpTo(44)" title="Card 45"></div><div class="dot" onclick="bioJumpTo(45)" title="Card 46"></div><div class="dot" onclick="bioJumpTo(46)" title="Card 47"></div><div class="dot" onclick="bioJumpTo(47)" title="Card 48"></div><div class="dot" onclick="bioJumpTo(48)" title="Card 49"></div><div class="dot" onclick="bioJumpTo(49)" title="Card 50"></div><div class="dot" onclick="bioJumpTo(50)" title="Card 51"></div><div class="dot" onclick="bioJumpTo(51)" title="Card 52"></div><div class="dot" onclick="bioJumpTo(52)" title="Card 53"></div><div class="dot" onclick="bioJumpTo(53)" title="Card 54"></div><div class="dot" onclick="bioJumpTo(54)" title="Card 55"></div><div class="dot" onclick="bioJumpTo(55)" title="Card 56"></div><div class="dot" onclick="bioJumpTo(56)" title="Card 57"></div><div class="dot" onclick="bioJumpTo(57)" title="Card 58"></div><div class="dot" onclick="bioJumpTo(58)" title="Card 59"></div><div class="dot" onclick="bioJumpTo(59)" title="Card 60"></div><div class="dot" onclick="bioJumpTo(60)" title="Card 61"></div><div class="dot" onclick="bioJumpTo(61)" title="Card 62"></div><div class="dot" onclick="bioJumpTo(62)" title="Card 63"></div><div class="dot" onclick="bioJumpTo(63)" title="Card 64"></div><div class="dot" onclick="bioJumpTo(64)" title="Card 65"></div><div class="dot" onclick="bioJumpTo(65)" title="Card 66"></div><div class="dot" onclick="bioJumpTo(66)" title="Card 67"></div><div class="dot" onclick="bioJumpTo(67)" title="Card 68"></div><div class="dot" onclick="bioJumpTo(68)" title="Card 69"></div><div class="dot" onclick="bioJumpTo(69)" title="Card 70"></div><div class="dot" onclick="bioJumpTo(70)" title="Card 71"></div><div class="dot" onclick="bioJumpTo(71)" title="Card 72"></div><div class="dot" onclick="bioJumpTo(72)" title="Card 73"></div><div class="dot" onclick="bioJumpTo(73)" title="Card 74"></div><div class="dot" onclick="bioJumpTo(74)" title="Card 75"></div><div class="dot" onclick="bioJumpTo(75)" title="Card 76"></div><div class="dot" onclick="bioJumpTo(76)" title="Card 77"></div><div class="dot" onclick="bioJumpTo(77)" title="Card 78"></div><div class="dot" onclick="bioJumpTo(78)" title="Card 79"></div><div class="dot" onclick="bioJumpTo(79)" title="Card 80"></div><div class="dot" onclick="bioJumpTo(80)" title="Card 81"></div><div class="dot" onclick="bioJumpTo(81)" title="Card 82"></div><div class="dot" onclick="bioJumpTo(82)" title="Card 83"></div></div>
     <div class="done-banner" id="bio-done">
       <h3>🎉 Deck complete!</h3>
       <p>You've gone through all the cards. Shuffle for another round.</p>
@@ -596,7 +774,7 @@
       <p>Match each term to its definition as fast as you can. Your time gets saved to the leaderboard!</p>
       <div class="match-lobby-btns">
         <button class="match-play-btn" onclick="bioStartMatch()">▶ Play</button>
-        <button class="lb-btn" onclick="toggleLb('bio')">🏆 Leaderboard</button>
+        <button class="lb-btn" onclick="toggleLb(&#39;bio&#39;)">🏆 Leaderboard</button>
       </div>
     </div>
     <div class="match-game-area" id="bio-match-game">
@@ -604,7 +782,7 @@
         <div class="match-meta"><strong id="bio-match-score">0</strong> / <strong id="bio-match-total">6</strong> matched &nbsp;·&nbsp; <strong id="bio-match-mistakes">0</strong> mistakes</div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <div class="match-timer"><span class="timer-icon">⏱</span><span class="timer-val" id="bio-match-timer">0.0s</span></div>
-          <button class="lb-btn" onclick="toggleLb('bio')">🏆 Leaderboard</button>
+          <button class="lb-btn" onclick="toggleLb(&#39;bio&#39;)">🏆 Leaderboard</button>
           <button class="match-new-btn" onclick="bioStartMatch()">↻ New round</button>
         </div>
       </div>
@@ -668,39 +846,39 @@
     <p class="subj-sub">Passé Composé, Hotel &amp; Restaurant Vocab · 57 cards</p>
   </header>
   <div class="mode-switcher">
-    <button class="mode-btn active" id="fr-btn-flash" onclick="frSwitchMode('flash')">🃏 Flashcards</button>
-    <button class="mode-btn" id="fr-btn-match" onclick="frSwitchMode('match')">🔗 Match</button>
-    <button class="mode-btn" id="fr-btn-fitb" onclick="frSwitchMode('fitb')">✏️ Fill in the Blank</button>
+    <button class="mode-btn active" id="fr-btn-flash" onclick="frSwitchMode(&#39;flash&#39;)">🃏 Flashcards</button>
+    <button class="mode-btn" id="fr-btn-match" onclick="frSwitchMode(&#39;match&#39;)">🔗 Match</button>
+    <button class="mode-btn" id="fr-btn-fitb" onclick="frSwitchMode(&#39;fitb&#39;)">✏️ Fill in the Blank</button>
   </div>
 
   <!-- FR FLASHCARD SCREEN -->
   <div class="screen visible" id="fr-screen-flash">
     <div class="toolbar">
-      <div class="tabs" id="fr-tabs"></div>
+      <div class="tabs" id="fr-tabs"><button class="tab active" onclick="frSetActive(&#39;All&#39;)"> All</button><button class="tab" onclick="frSetActive(&#39;Passé Composé&#39;)"> Passé Composé</button><button class="tab" onclick="frSetActive(&#39;Irregular Verbs&#39;)"> Irregular Verbs</button><button class="tab" onclick="frSetActive(&#39;Restaurant Vocab&#39;)"> Restaurant Vocab</button><button class="tab" onclick="frSetActive(&#39;Hotel Dialogue&#39;)"> Hotel Dialogue</button><button class="tab" onclick="frSetActive(&#39;Negation &amp; Questions&#39;)"> Negation &amp; Questions</button><button class="tab" onclick="frSetActive(&#39;Time Expressions&#39;)"> Time Expressions</button><button class="tab" onclick="frSetActive(&#39;Grammar Practice&#39;)"> Grammar Practice</button></div>
       <div class="right-tools">
         <button class="shuffle-btn" onclick="frShuffle()">⇄ Shuffle</button>
-        <span class="progress" id="fr-prog">1 / 42</span>
+        <span class="progress" id="fr-prog">1 / 57</span>
       </div>
     </div>
     <div class="card-area">
       <div class="card-wrap" id="fr-card" onclick="frFlip()">
         <div class="card-face front">
           <div class="card-label">Question</div>
-          <div class="card-q" id="fr-q-text"></div>
-          <div class="card-category" id="fr-q-cat"></div>
+          <div class="card-q" id="fr-q-text">How do you form the passé composé with avoir?</div>
+          <div class="card-category" id="fr-q-cat">Passé Composé</div>
         </div>
         <div class="card-face back">
           <div class="card-label">Answer</div>
-          <div class="card-a" id="fr-a-text"></div>
+          <div class="card-a" id="fr-a-text">Conjugate avoir in the present tense (j'ai, tu as, il/elle a, nous avons, vous avez, ils/elles ont) + the past participle of the main verb.</div>
         </div>
       </div>
     </div>
     <p class="flip-hint">Tap to flip <span>·</span> ← → arrow keys <span>·</span> Space to flip</p>
     <div class="nav-row">
-      <button class="nav-btn" id="fr-prev-btn" onclick="frGo(-1)" disabled>← Prev</button>
+      <button class="nav-btn" id="fr-prev-btn" onclick="frGo(-1)" disabled="">← Prev</button>
       <button class="nav-btn" id="fr-next-btn" onclick="frGo(1)">Next →</button>
     </div>
-    <div class="dot-row" id="fr-dots"></div>
+    <div class="dot-row" id="fr-dots"><div class="dot current" onclick="frJumpTo(0)" title="Card 1"></div><div class="dot" onclick="frJumpTo(1)" title="Card 2"></div><div class="dot" onclick="frJumpTo(2)" title="Card 3"></div><div class="dot" onclick="frJumpTo(3)" title="Card 4"></div><div class="dot" onclick="frJumpTo(4)" title="Card 5"></div><div class="dot" onclick="frJumpTo(5)" title="Card 6"></div><div class="dot" onclick="frJumpTo(6)" title="Card 7"></div><div class="dot" onclick="frJumpTo(7)" title="Card 8"></div><div class="dot" onclick="frJumpTo(8)" title="Card 9"></div><div class="dot" onclick="frJumpTo(9)" title="Card 10"></div><div class="dot" onclick="frJumpTo(10)" title="Card 11"></div><div class="dot" onclick="frJumpTo(11)" title="Card 12"></div><div class="dot" onclick="frJumpTo(12)" title="Card 13"></div><div class="dot" onclick="frJumpTo(13)" title="Card 14"></div><div class="dot" onclick="frJumpTo(14)" title="Card 15"></div><div class="dot" onclick="frJumpTo(15)" title="Card 16"></div><div class="dot" onclick="frJumpTo(16)" title="Card 17"></div><div class="dot" onclick="frJumpTo(17)" title="Card 18"></div><div class="dot" onclick="frJumpTo(18)" title="Card 19"></div><div class="dot" onclick="frJumpTo(19)" title="Card 20"></div><div class="dot" onclick="frJumpTo(20)" title="Card 21"></div><div class="dot" onclick="frJumpTo(21)" title="Card 22"></div><div class="dot" onclick="frJumpTo(22)" title="Card 23"></div><div class="dot" onclick="frJumpTo(23)" title="Card 24"></div><div class="dot" onclick="frJumpTo(24)" title="Card 25"></div><div class="dot" onclick="frJumpTo(25)" title="Card 26"></div><div class="dot" onclick="frJumpTo(26)" title="Card 27"></div><div class="dot" onclick="frJumpTo(27)" title="Card 28"></div><div class="dot" onclick="frJumpTo(28)" title="Card 29"></div><div class="dot" onclick="frJumpTo(29)" title="Card 30"></div><div class="dot" onclick="frJumpTo(30)" title="Card 31"></div><div class="dot" onclick="frJumpTo(31)" title="Card 32"></div><div class="dot" onclick="frJumpTo(32)" title="Card 33"></div><div class="dot" onclick="frJumpTo(33)" title="Card 34"></div><div class="dot" onclick="frJumpTo(34)" title="Card 35"></div><div class="dot" onclick="frJumpTo(35)" title="Card 36"></div><div class="dot" onclick="frJumpTo(36)" title="Card 37"></div><div class="dot" onclick="frJumpTo(37)" title="Card 38"></div><div class="dot" onclick="frJumpTo(38)" title="Card 39"></div><div class="dot" onclick="frJumpTo(39)" title="Card 40"></div><div class="dot" onclick="frJumpTo(40)" title="Card 41"></div><div class="dot" onclick="frJumpTo(41)" title="Card 42"></div><div class="dot" onclick="frJumpTo(42)" title="Card 43"></div><div class="dot" onclick="frJumpTo(43)" title="Card 44"></div><div class="dot" onclick="frJumpTo(44)" title="Card 45"></div><div class="dot" onclick="frJumpTo(45)" title="Card 46"></div><div class="dot" onclick="frJumpTo(46)" title="Card 47"></div><div class="dot" onclick="frJumpTo(47)" title="Card 48"></div><div class="dot" onclick="frJumpTo(48)" title="Card 49"></div><div class="dot" onclick="frJumpTo(49)" title="Card 50"></div><div class="dot" onclick="frJumpTo(50)" title="Card 51"></div><div class="dot" onclick="frJumpTo(51)" title="Card 52"></div><div class="dot" onclick="frJumpTo(52)" title="Card 53"></div><div class="dot" onclick="frJumpTo(53)" title="Card 54"></div><div class="dot" onclick="frJumpTo(54)" title="Card 55"></div><div class="dot" onclick="frJumpTo(55)" title="Card 56"></div><div class="dot" onclick="frJumpTo(56)" title="Card 57"></div></div>
     <div class="done-banner" id="fr-done">
       <h3>🎉 Deck complete!</h3>
       <p>You've gone through all the cards. Shuffle for another round.</p>
@@ -714,7 +892,7 @@
       <p>Match each term to its definition as fast as you can. Your time gets saved to the leaderboard!</p>
       <div class="match-lobby-btns">
         <button class="match-play-btn" onclick="frStartMatch()">▶ Play</button>
-        <button class="lb-btn" onclick="toggleLb('fr')">🏆 Leaderboard</button>
+        <button class="lb-btn" onclick="toggleLb(&#39;fr&#39;)">🏆 Leaderboard</button>
       </div>
     </div>
     <div class="match-game-area" id="fr-match-game">
@@ -722,7 +900,7 @@
         <div class="match-meta"><strong id="fr-match-score">0</strong> / <strong id="fr-match-total">6</strong> matched &nbsp;·&nbsp; <strong id="fr-match-mistakes">0</strong> mistakes</div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <div class="match-timer"><span class="timer-icon">⏱</span><span class="timer-val" id="fr-match-timer">0.0s</span></div>
-          <button class="lb-btn" onclick="toggleLb('fr')">🏆 Leaderboard</button>
+          <button class="lb-btn" onclick="toggleLb(&#39;fr&#39;)">🏆 Leaderboard</button>
           <button class="match-new-btn" onclick="frStartMatch()">↻ New round</button>
         </div>
       </div>
@@ -753,19 +931,19 @@
       <div class="fitb-meta">Question <strong id="fr-fitb-idx">1</strong> of <strong id="fr-fitb-total">10</strong> &nbsp;·&nbsp; <strong id="fr-fitb-correct">0</strong> correct</div>
       <button class="fitb-new-btn" onclick="frNewFitbRound()">↻ New round</button>
     </div>
-    <div class="fitb-progress-row" id="fr-fitb-pips"></div>
+    <div class="fitb-progress-row" id="fr-fitb-pips"><div class="fitb-pip active"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div></div>
     <div class="fitb-card" id="fr-fitb-card">
-      <div class="fitb-topic" id="fr-fitb-topic"></div>
-      <div class="fitb-sentence" id="fr-fitb-sentence"></div>
+      <div class="fitb-topic" id="fr-fitb-topic">Passé Composé Formation</div>
+      <div class="fitb-sentence" id="fr-fitb-sentence">To form the passé composé with avoir, use <input class="fitb-blank" id="fr-blank-0" data-answer="avoir" style="min-width:80px" placeholder="…" autocomplete="off" spellcheck="false" oninput="frFitbTyping()" onkeydown="frFitbKeydown(event)"> in the present tense + the <input class="fitb-blank" id="fr-blank-1" data-answer="past participle" style="min-width:165px" placeholder="…" autocomplete="off" spellcheck="false" oninput="frFitbTyping()" onkeydown="frFitbKeydown(event)"> of the main verb.</div>
     </div>
     <div class="fitb-word-bank" id="fr-fitb-bank-wrap">
       <div class="fitb-bank-label">Word bank · <kbd>← →</kbd> navigate &nbsp;·&nbsp; <kbd>Space</kbd> select &nbsp;·&nbsp; <kbd>Tab</kbd> switch blank &nbsp;·&nbsp; <kbd>Enter</kbd> next question</div>
-      <div class="fitb-chips" id="fr-fitb-chips"></div>
+      <div class="fitb-chips" id="fr-fitb-chips"><div class="fitb-chip" tabindex="0" data-word="être" onclick="frFitbChipClick(this)">être</div><div class="fitb-chip" tabindex="0" data-word="avoir" onclick="frFitbChipClick(this)">avoir</div><div class="fitb-chip" tabindex="0" data-word="tense" onclick="frFitbChipClick(this)">tense</div><div class="fitb-chip" tabindex="0" data-word="infinitive" onclick="frFitbChipClick(this)">infinitive</div><div class="fitb-chip" tabindex="0" data-word="mRNA" onclick="frFitbChipClick(this)">mRNA</div><div class="fitb-chip" tabindex="0" data-word="past participle" onclick="frFitbChipClick(this)">past participle</div></div>
     </div>
     <div class="fitb-feedback" id="fr-fitb-feedback"></div>
     <div class="fitb-actions">
       <button class="fitb-btn" id="fr-fitb-hint-btn" onclick="frFitbHint()">💡 Hint</button>
-      <button class="fitb-btn primary" id="fr-fitb-next-btn" onclick="frFitbNext()" disabled>Next →</button>
+      <button class="fitb-btn primary" id="fr-fitb-next-btn" onclick="frFitbNext()" disabled="">Next →</button>
     </div>
     <div class="fitb-complete" id="fr-fitb-complete">
       <div class="stars" id="fr-fitb-stars"></div>
@@ -776,6 +954,146 @@
   </div>
 </div><!-- /page-fr -->
 
+<!-- ══════════════════════════════════════
+     MY STUDY SET PAGE
+══════════════════════════════════════ -->
+<div class="page page-mine" id="page-mine">
+  <header class="subj-header">
+    <div class="subj-eyebrow">AI-Powered · Just For You</div>
+    <h1 class="subj-h1">My Study Set</h1>
+    <p class="subj-sub" id="mine-subj-sub">Paste your notes or describe what you want to study</p>
+  </header>
+
+  <!-- INPUT SCREEN -->
+  <div class="screen visible" id="mine-screen-input">
+    <!-- SAVED SETS -->
+    <div class="mine-saved-section" id="mine-saved-section" style="display:none">
+      <div class="mine-saved-header">
+        <div class="mine-saved-label">📚 Saved Sets</div>
+        <button class="mine-saved-clear-all" onclick="mineClearAllSaved()">Clear all</button>
+      </div>
+      <div class="mine-saved-list" id="mine-saved-list"></div>
+    </div>
+
+    <div class="mine-status" id="mine-status"></div>
+    <div class="mine-input-wrap">
+      <div class="mine-input-label">Your Content</div>
+      <div class="mine-upload-row" style="flex-wrap:wrap">
+        <label class="mine-upload-btn" for="mine-pdf-input">📎 Upload files (5 files max)</label>
+        <input type="file" id="mine-pdf-input" accept=".pdf,.doc,.docx,.txt,.md,.rtf" multiple style="display:none" onchange="minePdfSelected(this)">
+        <span class="mine-or-divider">or</span>
+        <span id="mine-pdf-hint" style="font-size:12px;color:var(--muted)">paste text below (5 files max)</span>
+      </div>
+      <div id="mine-pdf-list" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.5rem"></div>
+      <textarea class="mine-textarea" id="mine-textarea" placeholder="Paste your notes, a vocabulary list, a paragraph from a textbook, or just describe a topic — e.g. 'The French Revolution: causes, key events, and aftermath'&#10;&#10;The AI will turn it into flashcards, a matching game, and fill-in-the-blank questions."></textarea>
+      <div class="mine-gen-row">
+        <span class="mine-char-hint" id="mine-char-hint">Tip: more detail = better cards</span>
+        <button class="mine-gen-btn" id="mine-gen-btn" onclick="mineGenerate()">
+          <span id="mine-gen-btn-inner">🪄 Generate Study Set</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDY SCREENS (hidden until generated) -->
+  <div id="mine-study-area" style="display:none">
+    <div class="mode-switcher">
+      <button class="mode-btn active" id="mine-btn-flash" onclick="mineSwitchMode('flash')">🃏 Flashcards</button>
+      <button class="mode-btn" id="mine-btn-match" onclick="mineSwitchMode('match')">🔗 Match</button>
+      <button class="mode-btn" id="mine-btn-fitb" onclick="mineSwitchMode('fitb')">✏️ Fill in the Blank</button>
+      <button class="mode-btn" id="mine-btn-new" onclick="mineReset()" style="margin-left:auto">↩ New Set</button>
+    </div>
+
+    <!-- MINE FLASHCARD SCREEN -->
+    <div class="screen" id="mine-screen-flash">
+      <div class="toolbar">
+        <div class="right-tools" style="width:100%;justify-content:space-between">
+          <button class="shuffle-btn" onclick="mineShuffle()">⇄ Shuffle</button>
+          <span class="progress" id="mine-prog">1 / ?</span>
+        </div>
+      </div>
+      <div class="card-area">
+        <div class="card-wrap" id="mine-card" onclick="mineFlip()">
+          <div class="card-face front">
+            <div class="card-label">Question</div>
+            <div class="card-q" id="mine-q-text"></div>
+          </div>
+          <div class="card-face back">
+            <div class="card-label">Answer</div>
+            <div class="card-a" id="mine-a-text"></div>
+          </div>
+        </div>
+      </div>
+      <p class="flip-hint">Tap to flip <span>·</span> ← → arrow keys <span>·</span> Space to flip</p>
+      <div class="nav-row">
+        <button class="nav-btn" id="mine-prev-btn" onclick="mineGo(-1)" disabled>← Prev</button>
+        <button class="nav-btn" id="mine-next-btn" onclick="mineGo(1)">Next →</button>
+      </div>
+      <div class="dot-row" id="mine-dots"></div>
+      <div class="done-banner" id="mine-done">
+        <h3>🎉 Deck complete!</h3>
+        <p>You've gone through all the cards. Shuffle for another round.</p>
+      </div>
+    </div>
+
+    <!-- MINE MATCH SCREEN -->
+    <div class="screen" id="mine-screen-match">
+      <div class="match-header">
+        <div class="match-meta"><strong id="mine-match-score">0</strong> / <strong id="mine-match-total">6</strong> matched &nbsp;·&nbsp; <strong id="mine-match-mistakes">0</strong> mistakes</div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <div class="match-timer"><span class="timer-icon">⏱</span><span class="timer-val" id="mine-match-timer">0.0s</span></div>
+          <button class="match-new-btn" onclick="mineStartMatch()">↻ New round</button>
+        </div>
+      </div>
+      <p class="match-instructions">Pick a term, then its matching definition</p>
+      <div class="match-columns">
+        <div>
+          <div class="match-col-header">Terms</div>
+          <div id="mine-match-terms" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+        <div>
+          <div class="match-col-header">Definitions</div>
+          <div id="mine-match-defs" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+      <div class="match-complete" id="mine-match-complete">
+        <div class="stars" id="mine-match-stars"></div>
+        <h3>All matched!</h3>
+        <p id="mine-match-result-text"></p>
+        <button onclick="mineStartMatch()">Play again</button>
+      </div>
+    </div>
+
+    <!-- MINE FITB SCREEN -->
+    <div class="screen" id="mine-screen-fitb">
+      <div class="fitb-header">
+        <div class="fitb-meta">Question <strong id="mine-fitb-idx">1</strong> of <strong id="mine-fitb-total">10</strong> &nbsp;·&nbsp; <strong id="mine-fitb-correct">0</strong> correct</div>
+        <button class="fitb-new-btn" onclick="mineNewFitbRound()">↻ New round</button>
+      </div>
+      <div class="fitb-progress-row" id="mine-fitb-pips"></div>
+      <div class="fitb-card" id="mine-fitb-card">
+        <div class="fitb-topic" id="mine-fitb-topic"></div>
+        <div class="fitb-sentence" id="mine-fitb-sentence"></div>
+      </div>
+      <div class="fitb-word-bank" id="mine-fitb-bank-wrap">
+        <div class="fitb-bank-label">Word bank · <kbd>← →</kbd> navigate &nbsp;·&nbsp; <kbd>Space</kbd> select &nbsp;·&nbsp; <kbd>Tab</kbd> switch blank &nbsp;·&nbsp; <kbd>Enter</kbd> next question</div>
+        <div class="fitb-chips" id="mine-fitb-chips"></div>
+      </div>
+      <div class="fitb-feedback" id="mine-fitb-feedback"></div>
+      <div class="fitb-actions">
+        <button class="fitb-btn" id="mine-fitb-hint-btn" onclick="mineFitbHint()">💡 Hint</button>
+        <button class="fitb-btn primary" id="mine-fitb-next-btn" onclick="mineFitbNext()" disabled>Next →</button>
+      </div>
+      <div class="fitb-complete" id="mine-fitb-complete">
+        <div class="stars" id="mine-fitb-stars"></div>
+        <h3>Round complete!</h3>
+        <p id="mine-fitb-result-text"></p>
+        <button onclick="mineNewFitbRound()">Play again</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-mine -->
+
 <!-- NAME ENTRY MODAL -->
 <div class="name-modal-overlay" id="name-modal-overlay">
   <div class="name-modal">
@@ -784,6 +1102,15 @@
     <input class="name-input" id="name-modal-input" maxlength="20" placeholder="Your name…" autocomplete="off" spellcheck="false" onkeydown="nameModalKeydown(event)">
     <div class="name-error" id="name-modal-error"></div>
     <button class="name-modal-start" onclick="nameModalSubmit()">Start Game →</button>
+  </div>
+</div>
+
+<!-- MINE TOAST MODAL -->
+<div class="mine-toast-overlay" id="mine-toast-overlay" onclick="if(event.target===this)closeMineToast()">
+  <div class="mine-toast" id="mine-toast">
+    <div class="mine-toast-icon" id="mine-toast-icon"></div>
+    <div class="mine-toast-msg" id="mine-toast-msg"></div>
+    <button class="mine-toast-close" onclick="closeMineToast()">OK</button>
   </div>
 </div>
 
@@ -801,13 +1128,15 @@ function resetMatchLobby(subj){
 
 function showPage(name){
   ['eng','bio','fr','hist'].forEach(s=>resetMatchLobby(s));
-  ['home','eng','bio','fr','hist'].forEach(p=>{
+  ['home','eng','bio','fr','hist','mine'].forEach(p=>{
     document.getElementById('page-'+p).classList.toggle('visible',p===name);
   });
   ['eng','bio','fr','hist'].forEach(n=>{
     const el=document.getElementById('nav-'+n);
     el.className='topnav-tab'+(name===n?' active-'+n:'');
   });
+  const mineNav=document.getElementById('nav-mine');
+  mineNav.className='topnav-tab'+(name==='mine'?' active-mine':'');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -2186,15 +2515,15 @@ document.addEventListener("keydown",e=>{
     <p class="subj-sub">Age of Extremism: WWI, Russian Revolution, Interwar Period, WWII &amp; Cold War · 50 cards</p>
   </header>
   <div class="mode-switcher">
-    <button class="mode-btn active" id="hist-btn-flash" onclick="histSwitchMode('flash')">🃏 Flashcards</button>
-    <button class="mode-btn" id="hist-btn-match" onclick="histSwitchMode('match')">🔗 Match</button>
-    <button class="mode-btn" id="hist-btn-fitb" onclick="histSwitchMode('fitb')">✏️ Fill in the Blank</button>
+    <button class="mode-btn active" id="hist-btn-flash" onclick="histSwitchMode(&#39;flash&#39;)">🃏 Flashcards</button>
+    <button class="mode-btn" id="hist-btn-match" onclick="histSwitchMode(&#39;match&#39;)">🔗 Match</button>
+    <button class="mode-btn" id="hist-btn-fitb" onclick="histSwitchMode(&#39;fitb&#39;)">✏️ Fill in the Blank</button>
   </div>
 
   <!-- HIST FLASHCARD SCREEN -->
   <div class="screen visible" id="hist-screen-flash">
     <div class="toolbar">
-      <div class="tabs" id="hist-tabs"></div>
+      <div class="tabs" id="hist-tabs"><button class="tab active" onclick="histSetActive(&#39;All&#39;)"> All</button><button class="tab" onclick="histSetActive(&#39;WWI&#39;)"> WWI</button><button class="tab" onclick="histSetActive(&#39;Interwar Period&#39;)"> Interwar Period</button><button class="tab" onclick="histSetActive(&#39;WWII&#39;)"> WWII</button><button class="tab" onclick="histSetActive(&#39;Cold War&#39;)"> Cold War</button><button class="tab" onclick="histSetActive(&#39;Age of Extremism&#39;)"> Age of Extremism</button><button class="tab" onclick="histSetActive(&#39;Key Figures&#39;)"> Key Figures</button><button class="tab" onclick="histSetActive(&#39;Exam Skills&#39;)"> Exam Skills</button></div>
       <div class="right-tools">
         <button class="shuffle-btn" onclick="histShuffle()">⇄ Shuffle</button>
         <span class="progress" id="hist-prog">1 / 50</span>
@@ -2204,21 +2533,21 @@ document.addEventListener("keydown",e=>{
       <div class="card-wrap" id="hist-card" onclick="histFlip()">
         <div class="card-face front">
           <div class="card-label">Question</div>
-          <div class="card-q" id="hist-q-text"></div>
-          <div class="card-category" id="hist-q-cat"></div>
+          <div class="card-q" id="hist-q-text">What does MAIN stand for?</div>
+          <div class="card-category" id="hist-q-cat">WWI</div>
         </div>
         <div class="card-face back">
           <div class="card-label">Answer</div>
-          <div class="card-a" id="hist-a-text"></div>
+          <div class="card-a" id="hist-a-text">Militarism, Alliances, Imperialism, Nationalism — the four main causes of WWI.</div>
         </div>
       </div>
     </div>
     <p class="flip-hint">Tap to flip <span>·</span> ← → arrow keys <span>·</span> Space to flip</p>
     <div class="nav-row">
-      <button class="nav-btn" id="hist-prev-btn" onclick="histGo(-1)" disabled>← Prev</button>
+      <button class="nav-btn" id="hist-prev-btn" onclick="histGo(-1)" disabled="">← Prev</button>
       <button class="nav-btn" id="hist-next-btn" onclick="histGo(1)">Next →</button>
     </div>
-    <div class="dot-row" id="hist-dots"></div>
+    <div class="dot-row" id="hist-dots"><div class="dot current" onclick="histJumpTo(0)" title="Card 1"></div><div class="dot" onclick="histJumpTo(1)" title="Card 2"></div><div class="dot" onclick="histJumpTo(2)" title="Card 3"></div><div class="dot" onclick="histJumpTo(3)" title="Card 4"></div><div class="dot" onclick="histJumpTo(4)" title="Card 5"></div><div class="dot" onclick="histJumpTo(5)" title="Card 6"></div><div class="dot" onclick="histJumpTo(6)" title="Card 7"></div><div class="dot" onclick="histJumpTo(7)" title="Card 8"></div><div class="dot" onclick="histJumpTo(8)" title="Card 9"></div><div class="dot" onclick="histJumpTo(9)" title="Card 10"></div><div class="dot" onclick="histJumpTo(10)" title="Card 11"></div><div class="dot" onclick="histJumpTo(11)" title="Card 12"></div><div class="dot" onclick="histJumpTo(12)" title="Card 13"></div><div class="dot" onclick="histJumpTo(13)" title="Card 14"></div><div class="dot" onclick="histJumpTo(14)" title="Card 15"></div><div class="dot" onclick="histJumpTo(15)" title="Card 16"></div><div class="dot" onclick="histJumpTo(16)" title="Card 17"></div><div class="dot" onclick="histJumpTo(17)" title="Card 18"></div><div class="dot" onclick="histJumpTo(18)" title="Card 19"></div><div class="dot" onclick="histJumpTo(19)" title="Card 20"></div><div class="dot" onclick="histJumpTo(20)" title="Card 21"></div><div class="dot" onclick="histJumpTo(21)" title="Card 22"></div><div class="dot" onclick="histJumpTo(22)" title="Card 23"></div><div class="dot" onclick="histJumpTo(23)" title="Card 24"></div><div class="dot" onclick="histJumpTo(24)" title="Card 25"></div><div class="dot" onclick="histJumpTo(25)" title="Card 26"></div><div class="dot" onclick="histJumpTo(26)" title="Card 27"></div><div class="dot" onclick="histJumpTo(27)" title="Card 28"></div><div class="dot" onclick="histJumpTo(28)" title="Card 29"></div><div class="dot" onclick="histJumpTo(29)" title="Card 30"></div><div class="dot" onclick="histJumpTo(30)" title="Card 31"></div><div class="dot" onclick="histJumpTo(31)" title="Card 32"></div><div class="dot" onclick="histJumpTo(32)" title="Card 33"></div><div class="dot" onclick="histJumpTo(33)" title="Card 34"></div><div class="dot" onclick="histJumpTo(34)" title="Card 35"></div><div class="dot" onclick="histJumpTo(35)" title="Card 36"></div><div class="dot" onclick="histJumpTo(36)" title="Card 37"></div><div class="dot" onclick="histJumpTo(37)" title="Card 38"></div><div class="dot" onclick="histJumpTo(38)" title="Card 39"></div><div class="dot" onclick="histJumpTo(39)" title="Card 40"></div><div class="dot" onclick="histJumpTo(40)" title="Card 41"></div><div class="dot" onclick="histJumpTo(41)" title="Card 42"></div><div class="dot" onclick="histJumpTo(42)" title="Card 43"></div><div class="dot" onclick="histJumpTo(43)" title="Card 44"></div><div class="dot" onclick="histJumpTo(44)" title="Card 45"></div><div class="dot" onclick="histJumpTo(45)" title="Card 46"></div><div class="dot" onclick="histJumpTo(46)" title="Card 47"></div><div class="dot" onclick="histJumpTo(47)" title="Card 48"></div><div class="dot" onclick="histJumpTo(48)" title="Card 49"></div><div class="dot" onclick="histJumpTo(49)" title="Card 50"></div></div>
     <div class="done-banner" id="hist-done">
       <h3>🎉 Deck complete!</h3>
       <p>You've gone through all the cards. Shuffle for another round.</p>
@@ -2232,7 +2561,7 @@ document.addEventListener("keydown",e=>{
       <p>Match each term to its definition as fast as you can. Your time gets saved to the leaderboard!</p>
       <div class="match-lobby-btns">
         <button class="match-play-btn" onclick="histStartMatch()">▶ Play</button>
-        <button class="lb-btn" onclick="toggleLb('hist')">🏆 Leaderboard</button>
+        <button class="lb-btn" onclick="toggleLb(&#39;hist&#39;)">🏆 Leaderboard</button>
       </div>
     </div>
     <div class="match-game-area" id="hist-match-game">
@@ -2240,7 +2569,7 @@ document.addEventListener("keydown",e=>{
         <div class="match-meta"><strong id="hist-match-score">0</strong> / <strong id="hist-match-total">6</strong> matched &nbsp;·&nbsp; <strong id="hist-match-mistakes">0</strong> mistakes</div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <div class="match-timer"><span class="timer-icon">⏱</span><span class="timer-val" id="hist-match-timer">0.0s</span></div>
-          <button class="lb-btn" onclick="toggleLb('hist')">🏆 Leaderboard</button>
+          <button class="lb-btn" onclick="toggleLb(&#39;hist&#39;)">🏆 Leaderboard</button>
           <button class="match-new-btn" onclick="histStartMatch()">↻ New round</button>
         </div>
       </div>
@@ -2271,19 +2600,19 @@ document.addEventListener("keydown",e=>{
       <div class="fitb-meta">Question <strong id="hist-fitb-idx">1</strong> of <strong id="hist-fitb-total">10</strong> &nbsp;·&nbsp; <strong id="hist-fitb-correct">0</strong> correct</div>
       <button class="fitb-new-btn" onclick="histNewFitbRound()">↻ New round</button>
     </div>
-    <div class="fitb-progress-row" id="hist-fitb-pips"></div>
+    <div class="fitb-progress-row" id="hist-fitb-pips"><div class="fitb-pip active"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div><div class="fitb-pip"></div></div>
     <div class="fitb-card" id="hist-fitb-card">
-      <div class="fitb-topic" id="hist-fitb-topic"></div>
-      <div class="fitb-sentence" id="hist-fitb-sentence"></div>
+      <div class="fitb-topic" id="hist-fitb-topic">End of the Cold War</div>
+      <div class="fitb-sentence" id="hist-fitb-sentence">Gorbachev's reforms of <input class="fitb-blank" id="hist-blank-0" data-answer="glasnost" style="min-width:88px" placeholder="…" autocomplete="off" spellcheck="false" oninput="histFitbTyping()" onkeydown="histFitbKeydown(event)"> (openness) and <input class="fitb-blank" id="hist-blank-1" data-answer="perestroika" style="min-width:121px" placeholder="…" autocomplete="off" spellcheck="false" oninput="histFitbTyping()" onkeydown="histFitbKeydown(event)"> (restructuring) weakened Soviet control. The Berlin Wall fell on <input class="fitb-blank" id="hist-blank-2" data-answer="november 9, 1989" style="min-width:176px" placeholder="…" autocomplete="off" spellcheck="false" oninput="histFitbTyping()" onkeydown="histFitbKeydown(event)">.</div>
     </div>
     <div class="fitb-word-bank" id="hist-fitb-bank-wrap">
       <div class="fitb-bank-label">Word bank · <kbd>← →</kbd> navigate &nbsp;·&nbsp; <kbd>Space</kbd> select &nbsp;·&nbsp; <kbd>Tab</kbd> switch blank &nbsp;·&nbsp; <kbd>Enter</kbd> next question</div>
-      <div class="fitb-chips" id="hist-fitb-chips"></div>
+      <div class="fitb-chips" id="hist-fitb-chips"><div class="fitb-chip" tabindex="0" data-word="October 1917" onclick="histFitbChipClick(this)">October 1917</div><div class="fitb-chip" tabindex="0" data-word="centralisation" onclick="histFitbChipClick(this)">centralisation</div><div class="fitb-chip" tabindex="0" data-word="November 9, 1989" onclick="histFitbChipClick(this)">November 9, 1989</div><div class="fitb-chip" tabindex="0" data-word="perestroika" onclick="histFitbChipClick(this)">perestroika</div><div class="fitb-chip" tabindex="0" data-word="glasnost" onclick="histFitbChipClick(this)">glasnost</div><div class="fitb-chip" tabindex="0" data-word="communism" onclick="histFitbChipClick(this)">communism</div><div class="fitb-chip" tabindex="0" data-word="January 1991" onclick="histFitbChipClick(this)">January 1991</div></div>
     </div>
     <div class="fitb-feedback" id="hist-fitb-feedback"></div>
     <div class="fitb-actions">
       <button class="fitb-btn" id="hist-fitb-hint-btn" onclick="histFitbHint()">💡 Hint</button>
-      <button class="fitb-btn primary" id="hist-fitb-next-btn" onclick="histFitbNext()" disabled>Next →</button>
+      <button class="fitb-btn primary" id="hist-fitb-next-btn" onclick="histFitbNext()" disabled="">Next →</button>
     </div>
     <div class="fitb-complete" id="hist-fitb-complete">
       <div class="stars" id="hist-fitb-stars"></div>
@@ -2659,6 +2988,644 @@ document.addEventListener("keydown",e=>{
 })();
 // Close leaderboard modal on Escape
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLbModal();});
+
+// ── DAILY LIMIT ──
+const MINE_LIMIT_KEY='studyhub_gen_limit';
+const DAILY_MAX=3;
+function mineGetUsage(){
+  try{
+    const d=JSON.parse(localStorage.getItem(MINE_LIMIT_KEY)||'{}');
+    const today=new Date().toDateString();
+    if(d.date!==today)return{date:today,count:0};
+    return d;
+  }catch{return{date:new Date().toDateString(),count:0};}
+}
+function mineIncrUsage(){
+  const d=mineGetUsage();
+  d.count++;
+  localStorage.setItem(MINE_LIMIT_KEY,JSON.stringify(d));
+}
+function mineUsageLeft(){return Math.max(0,DAILY_MAX-mineGetUsage().count);}
+function mineUpdateLimitUI(){
+  const left=mineUsageLeft();
+  const hint=document.getElementById('mine-char-hint');
+  if(left===0){
+    hint.innerHTML='<span style="color:var(--red)">⛔ Daily limit reached (3/3) — come back tomorrow</span>';
+    document.getElementById('mine-gen-btn').disabled=true;
+  } else {
+    hint.textContent=`Tip: more detail = better cards · ${left} generation${left===1?'':'s'} left today`;
+  }
+}
+
+// ── MY STUDY SET INIT ──
+(function initMine(){mineRenderSaved();mineUpdateLimitUI();})();
+
+// ══════════════════════════════════════════════════════
+// MY STUDY SET — AI GENERATION + GAMES
+// ══════════════════════════════════════════════════════
+let mineCards=[];       // [{q,a}]
+let mineMatchPairs=[];  // [{term,def}]
+let mineFitbData=[];    // [{sentence,blanks:[{placeholder,answer}],topic,distractors}]
+let minePdfFiles=[];    // [{name, base64}]
+// ── LOADING ANIMATION ──
+const MINE_STEPS=['Reading your content','Crafting flashcards','Building matching pairs','Writing fill-in-the-blank'];
+let mineLoadingTimer=null;
+let mineLoadingStep=0;
+
+function mineShowLoading(){
+  const overlay=document.getElementById('mine-loading-overlay');
+  overlay.classList.add('active');
+  // Spawn particles
+  const pc=document.getElementById('mine-loading-particles');
+  pc.innerHTML='';
+  const colors=['#63b3ed','#9a75f8','#f0eee8','#3b82f6','#a78bfa'];
+  for(let i=0;i<28;i++){
+    const p=document.createElement('div');
+    p.className='mine-particle';
+    const size=Math.random()*6+3;
+    p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*3}s;animation-duration:${3+Math.random()*2}s`;
+    pc.appendChild(p);
+  }
+  mineLoadingStep=0;
+  mineAdvanceLoadingStep();
+  mineLoadingTimer=setInterval(mineAdvanceLoadingStep,4000);
+}
+
+function mineAdvanceLoadingStep(){
+  const steps=document.querySelectorAll('.mine-loading-step');
+  const subtitle=document.getElementById('mine-loading-subtitle');
+  const bar=document.getElementById('mine-loading-bar');
+  steps.forEach((s,i)=>{
+    s.classList.remove('active','done');
+    if(i<mineLoadingStep)s.classList.add('done');
+    else if(i===mineLoadingStep)s.classList.add('active');
+  });
+  subtitle.textContent=MINE_STEPS[Math.min(mineLoadingStep,MINE_STEPS.length-1)];
+  bar.style.width=((mineLoadingStep+1)/MINE_STEPS.length*85)+'%';
+  mineLoadingStep=Math.min(mineLoadingStep+1,MINE_STEPS.length-1);
+}
+
+function mineHideLoading(success){
+  if(mineLoadingTimer){clearInterval(mineLoadingTimer);mineLoadingTimer=null;}
+  if(success){
+    const bar=document.getElementById('mine-loading-bar');
+    bar.style.width='100%';
+    const steps=document.querySelectorAll('.mine-loading-step');
+    steps.forEach(s=>{s.classList.remove('active');s.classList.add('done');});
+    document.getElementById('mine-loading-subtitle').textContent='Done! ✓';
+    setTimeout(()=>document.getElementById('mine-loading-overlay').classList.remove('active'),600);
+  }else{
+    document.getElementById('mine-loading-overlay').classList.remove('active');
+  }
+}
+
+// ── SAVED SETS (localStorage) ──
+const MINE_STORAGE_KEY='studyhub_mine_sets';
+
+function mineSavedLoad(){
+  try{return JSON.parse(localStorage.getItem(MINE_STORAGE_KEY)||'[]');}catch{return[];}
+}
+function mineSavedWrite(sets){
+  try{localStorage.setItem(MINE_STORAGE_KEY,JSON.stringify(sets));}catch(e){console.warn('Storage full',e);}
+}
+function mineSavedAdd(data){
+  const sets=mineSavedLoad();
+  const entry={id:Date.now(),title:data.title,savedAt:new Date().toLocaleDateString(),data};
+  sets.unshift(entry);
+  if(sets.length>20)sets.length=20; // cap at 20
+  mineSavedWrite(sets);
+  mineRenderSaved();
+}
+function mineSavedDelete(id,e){
+  e.stopPropagation();
+  const sets=mineSavedLoad().filter(s=>s.id!==id);
+  mineSavedWrite(sets);
+  mineRenderSaved();
+}
+function mineClearAllSaved(){
+  if(!confirm('Delete all saved sets?'))return;
+  mineSavedWrite([]);
+  mineRenderSaved();
+}
+function mineRenderSaved(){
+  const sets=mineSavedLoad();
+  const section=document.getElementById('mine-saved-section');
+  const list=document.getElementById('mine-saved-list');
+  if(!sets.length){section.style.display='none';return;}
+  section.style.display='';
+  list.innerHTML=sets.map(s=>`
+    <div class="mine-saved-item" onclick="mineLoadSaved(${s.id})">
+      <div class="mine-saved-item-icon">🪄</div>
+      <div class="mine-saved-item-info">
+        <div class="mine-saved-item-title">${s.title||'Untitled set'}</div>
+        <div class="mine-saved-item-meta">${(s.data.flashcards||[]).length} cards · Saved ${s.savedAt}</div>
+      </div>
+      <button class="mine-saved-item-del" onclick="mineSavedDelete(${s.id},event)" title="Delete">✕</button>
+    </div>
+  `).join('');
+}
+function mineLoadSaved(id){
+  const sets=mineSavedLoad();
+  const entry=sets.find(s=>s.id===id);
+  if(!entry)return;
+  mineLoadSet(entry.data,false);
+}
+
+// ── PDF HANDLING (multi-file) ──
+function minePdfSelected(input){
+  const files=[...input.files];
+  if(!files.length)return;
+  const remaining=5-minePdfFiles.length;
+  if(remaining<=0){mineSetStatus('You already have 5 files — remove one before adding more.','err');input.value='';return;}
+  if(files.length>remaining){mineSetStatus(`You selected ${files.length} files but only ${remaining} spot${remaining===1?'':'s'} left — 5 files max total.`,'err');input.value='';return;}
+  let loaded=0;
+  files.forEach(file=>{
+    if(file.type!=='application/pdf'){
+      mineSetStatus('That file type isn\'t supported. Try a PDF, DOCX, or text file.','err');
+      loaded++;
+      if(loaded===files.length)mineRenderPdfList();
+      return;
+    }
+    if(file.size>20*1024*1024){
+      mineSetStatus(`${file.name} is too large — max 20 MB per file.`,'err');
+      loaded++;
+      if(loaded===files.length)mineRenderPdfList();
+      return;
+    }
+    const reader=new FileReader();
+    reader.onload=e=>{
+      minePdfFiles.push({name:file.name,base64:e.target.result.split(',')[1]});
+      loaded++;
+      if(loaded===files.length){
+        mineRenderPdfList();
+        document.getElementById('mine-textarea').placeholder='(Optional) Add any extra context or focus for the AI…';
+        mineSetStatus(`${minePdfFiles.length} file${minePdfFiles.length===1?'':'s'} ready — hit Generate when set.`,'ok');
+      }
+    };
+    reader.onerror=()=>{
+      mineSetStatus('Could not read ' + file.name + ' — try a different file.','err');
+      loaded++;
+      if(loaded===files.length)mineRenderPdfList();
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value='';
+}
+function mineRenderPdfList(){
+  const list=document.getElementById('mine-pdf-list');
+  const hint=document.getElementById('mine-pdf-hint');
+  if(!minePdfFiles.length){
+    list.style.display='none';
+    hint.style.display='';
+    document.getElementById('mine-textarea').placeholder="Paste your notes, a vocabulary list, a paragraph from a textbook, or just describe a topic — e.g. 'The French Revolution: causes, key events, and aftermath'\n\nThe AI will turn it into flashcards, a matching game, and fill-in-the-blank questions.";
+    return;
+  }
+  hint.style.display='none';
+  list.style.display='flex';
+  list.innerHTML=minePdfFiles.map((f,i)=>`
+    <span style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.3);border-radius:999px;padding:3px 10px;color:#63b3ed;max-width:180px">
+      <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📎 ${f.name}</span>
+      <span style="cursor:pointer;color:var(--red);flex-shrink:0;font-size:13px" onclick="mineRemovePdf(${i})" title="Remove">✕</span>
+    </span>`).join('');
+}
+function mineRemovePdf(i){
+  minePdfFiles.splice(i,1);
+  mineRenderPdfList();
+  if(!minePdfFiles.length)mineSetStatus('','');
+}
+
+let mineIdx=0;
+let mineDeck=[];
+let mineFlipped=false;
+
+// ── GENERATE ──
+async function mineGenerate(){
+  const text=document.getElementById('mine-textarea').value.trim();
+  if(!minePdfFiles.length&&text.length<10){
+    mineSetStatus('Please upload a file or paste at least a sentence of text.','err');return;
+  }
+  if(mineUsageLeft()<=0){
+    mineSetStatus('⛔ You have reached the 3 generations per day limit. Come back tomorrow!','err');return;
+  }
+  const btn=document.getElementById('mine-gen-btn');
+  const inner=document.getElementById('mine-gen-btn-inner');
+  btn.disabled=true;
+  inner.innerHTML='<div class="mine-gen-spinner"></div> Generating…';
+  mineSetStatus('','');
+  mineShowLoading();
+
+  const basePrompt=`You are a study card generator. Given the content below, generate a JSON study set.
+
+Return ONLY valid JSON, no markdown, no explanation, no backticks. The JSON must have exactly this shape:
+{
+  "title": "short topic title (max 6 words)",
+  "flashcards": [
+    {"q": "question text", "a": "answer text"}
+  ],
+  "matchPairs": [
+    {"term": "short term", "def": "definition (max 20 words)"}
+  ],
+  "fitb": [
+    {
+      "topic": "category label",
+      "sentence": "A sentence with [BLANK] where key words go, can have multiple [BLANK] entries.",
+      "answers": ["word1", "word2"],
+      "distractors": ["wrong1", "wrong2"]
+    }
+  ]
+}
+
+Rules:
+- flashcards: 8–14 cards. Questions should be clear and varied.
+- matchPairs: exactly 8 pairs. Terms should be short (1–4 words), defs concise.
+- fitb: 8–10 questions. Each sentence has 1–2 [BLANK] slots. answers array matches blanks left-to-right. Add 2–3 distractors per question.
+- All content must come directly from the source material.
+- No duplicates across sections.
+${text?`\nExtra context: ${text.substring(0,1000)}`:''}`;
+
+  let userContent;
+  if(minePdfFiles.length){
+    userContent=[
+      ...minePdfFiles.map(f=>({type:'document',source:{type:'base64',media_type:'application/pdf',data:f.base64}})),
+      {type:'text',text:basePrompt}
+    ];
+  }else{
+    userContent=[{type:'text',text:basePrompt+`\n\nSOURCE MATERIAL:\n${text.substring(0,4000)}`}];
+  }
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:2500,
+        messages:[{role:'user',content:userContent}]
+      })
+    });
+    const data=await res.json();
+    if(!res.ok){throw new Error(data.error?.message||'API error');}
+    const raw=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+    let parsed;
+    try{parsed=JSON.parse(raw);}catch(e){throw new Error('Could not parse response. Please try again.');}
+    if(!parsed.flashcards||!parsed.matchPairs||!parsed.fitb){throw new Error('Incomplete response. Please try again.');}
+    mineIncrUsage();
+    mineHideLoading(true);
+    mineLoadSet(parsed,true);
+    mineUpdateLimitUI();
+  }catch(e){
+    mineHideLoading(false);
+    mineSetStatus('Error: '+e.message,'err');
+    btn.disabled=false;
+    inner.textContent='🪄 Generate Study Set';
+  }
+}
+
+function mineSetStatus(msg,type){
+  if(!msg)return;
+  const overlay=document.getElementById('mine-toast-overlay');
+  const toast=document.getElementById('mine-toast');
+  const icon=document.getElementById('mine-toast-icon');
+  const msgEl=document.getElementById('mine-toast-msg');
+  toast.className='mine-toast '+(type||'');
+  icon.textContent=type==='err'?'⚠️':'✓';
+  msgEl.textContent=msg;
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMineToast(){
+  document.getElementById('mine-toast-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function mineLoadSet(data, doSave){
+  mineCards=data.flashcards||[];
+  mineMatchPairs=data.matchPairs||[];
+  mineFitbData=data.fitb||[];
+
+  document.getElementById('mine-subj-sub').textContent=data.title||'Your custom study set';
+
+  // Show study area, hide input
+  document.getElementById('mine-screen-input').classList.remove('visible');
+  document.getElementById('mine-screen-input').style.display='none';
+  document.getElementById('mine-study-area').style.display='';
+
+  // Init flashcards
+  mineDeck=[...mineCards].map((_,i)=>i);
+  mineIdx=0;mineFlipped=false;
+  mineRenderFlash();
+  mineRenderDots();
+
+  // Init match
+  mineStartMatch();
+
+  // Init fitb
+  mineNewFitbRound();
+
+  mineSwitchMode('flash');
+
+  // Save to localStorage if this is a freshly generated set
+  if(doSave)mineSavedAdd(data);
+}
+
+function mineReset(){
+  minePdfFiles=[];
+  mineRenderPdfList();
+  document.getElementById('mine-pdf-input').value='';
+  document.getElementById('mine-screen-input').style.display='';
+  document.getElementById('mine-screen-input').classList.add('visible');
+  document.getElementById('mine-study-area').style.display='none';
+  document.getElementById('mine-subj-sub').textContent='Paste your notes or describe what you want to study';
+  document.getElementById('mine-status').textContent='';
+  document.getElementById('mine-textarea').value='';
+  document.getElementById('mine-textarea').placeholder="Paste your notes, a vocabulary list, a paragraph from a textbook, or just describe a topic — e.g. 'The French Revolution: causes, key events, and aftermath'\n\nThe AI will turn it into flashcards, a matching game, and fill-in-the-blank questions.";
+  const btn=document.getElementById('mine-gen-btn');
+  btn.disabled=false;
+  document.getElementById('mine-gen-btn-inner').textContent='🪄 Generate Study Set';
+  mineRenderSaved();
+  mineUpdateLimitUI();
+}
+
+// ── MODE SWITCHER ──
+function mineSwitchMode(mode){
+  ['flash','match','fitb'].forEach(m=>{
+    document.getElementById('mine-screen-'+m).classList.toggle('visible',m===mode);
+    document.getElementById('mine-btn-'+m).classList.toggle('active',m===mode);
+  });
+}
+
+// ── FLASHCARDS ──
+function mineRenderFlash(){
+  if(!mineDeck.length)return;
+  const c=mineCards[mineDeck[mineIdx]];
+  document.getElementById('mine-q-text').textContent=c.q;
+  document.getElementById('mine-a-text').textContent=c.a;
+  document.getElementById('mine-prog').textContent=(mineIdx+1)+' / '+mineDeck.length;
+  const wrap=document.getElementById('mine-card');
+  wrap.classList.remove('flipped');mineFlipped=false;
+  document.getElementById('mine-prev-btn').disabled=mineIdx===0;
+  document.getElementById('mine-next-btn').disabled=mineIdx===mineDeck.length-1;
+  document.getElementById('mine-done').classList.remove('show');
+}
+function mineFlip(){
+  mineFlipped=!mineFlipped;
+  document.getElementById('mine-card').classList.toggle('flipped',mineFlipped);
+}
+function mineGo(dir){
+  const newIdx=mineIdx+dir;
+  if(newIdx<0||newIdx>=mineDeck.length)return;
+  mineIdx=newIdx;mineRenderFlash();mineRenderDots();
+  if(mineIdx===mineDeck.length-1)document.getElementById('mine-done').classList.add('show');
+}
+function mineShuffle(){
+  for(let i=mineDeck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[mineDeck[i],mineDeck[j]]=[mineDeck[j],mineDeck[i]];}
+  mineIdx=0;mineRenderFlash();mineRenderDots();
+}
+function mineRenderDots(){
+  document.getElementById('mine-dots').innerHTML=mineDeck.map((_,i)=>
+    `<div class="dot${i===mineIdx?' current':i<mineIdx?' seen':''}" onclick="mineJumpTo(${i})" title="Card ${i+1}"></div>`
+  ).join('');
+}
+function mineJumpTo(i){mineIdx=i;mineRenderFlash();mineRenderDots();}
+
+// ── MATCH ──
+let mineMatchSel=null;
+let mineMatchCorrect=0;
+let mineMatchMistakes=0;
+let mineMatchTotal=0;
+
+function mineStartMatch(){
+  mineMatchSel=null;mineMatchCorrect=0;mineMatchMistakes=0;
+  document.getElementById('mine-match-complete').classList.remove('show');
+  const pool=[...mineMatchPairs].sort(()=>Math.random()-0.5).slice(0,6);
+  mineMatchTotal=pool.length;
+  document.getElementById('mine-match-score').textContent='0';
+  document.getElementById('mine-match-total').textContent=mineMatchTotal;
+  document.getElementById('mine-match-mistakes').textContent='0';
+  document.getElementById('mine-match-timer').textContent='0.0s';
+  stopMatchTimer('mine');startMatchTimer('mine');
+
+  const terms=[...pool].sort(()=>Math.random()-0.5);
+  const defs=[...pool].sort(()=>Math.random()-0.5);
+
+  document.getElementById('mine-match-terms').innerHTML=terms.map((p,i)=>
+    `<div class="match-tile term" data-id="${mineMatchPairs.indexOf(p)}" onclick="mineMatchClick(this,'term')">${p.term}</div>`
+  ).join('');
+  document.getElementById('mine-match-defs').innerHTML=defs.map((p,i)=>
+    `<div class="match-tile" data-id="${mineMatchPairs.indexOf(p)}" onclick="mineMatchClick(this,'def')">${p.def}</div>`
+  ).join('');
+}
+
+function mineMatchClick(el,side){
+  if(el.classList.contains('matched')||el.classList.contains('wrong'))return;
+  if(mineMatchSel&&mineMatchSel.el===el){el.classList.remove('selected');mineMatchSel=null;return;}
+  if(mineMatchSel&&mineMatchSel.side===side){
+    mineMatchSel.el.classList.remove('selected');
+    mineMatchSel={el,side};el.classList.add('selected');return;
+  }
+  if(!mineMatchSel){mineMatchSel={el,side};el.classList.add('selected');return;}
+  // Two different sides selected
+  const a=mineMatchSel,b={el,side};
+  a.el.classList.remove('selected');
+  if(a.el.dataset.id===b.el.dataset.id){
+    [a.el,b.el].forEach(t=>{t.classList.add('matched','just-matched');});
+    mineMatchCorrect++;
+    document.getElementById('mine-match-score').textContent=mineMatchCorrect;
+    mineMatchSel=null;
+    if(mineMatchCorrect===mineMatchTotal){
+      stopMatchTimer('mine');
+      const elapsed=getMatchElapsed('mine').toFixed(1);
+      const stars=mineMatchMistakes===0?'🌟🌟🌟':mineMatchMistakes<=2?'⭐⭐⭐':mineMatchMistakes<=5?'⭐⭐':'⭐';
+      document.getElementById('mine-match-stars').textContent=stars;
+      document.getElementById('mine-match-result-text').textContent=`${mineMatchTotal}/${mineMatchTotal} matched in ${elapsed}s with ${mineMatchMistakes} mistake${mineMatchMistakes!==1?'s':''}.`;
+      document.getElementById('mine-match-complete').classList.add('show');
+    }
+  }else{
+    [a.el,b.el].forEach(t=>{t.classList.add('wrong');});
+    mineMatchMistakes++;
+    document.getElementById('mine-match-mistakes').textContent=mineMatchMistakes;
+    mineMatchSel=null;
+    setTimeout(()=>{[a.el,b.el].forEach(t=>t.classList.remove('wrong'));},500);
+  }
+}
+
+// ── FITB ──
+let mineFitbRound=[];
+let mineFitbQIdx=0;
+let mineFitbBlanks=[];
+let mineFitbAnswered=false;
+let mineFitbCorrectCount=0;
+let mineFitbResults=[];
+let mineFitbLastFocused=null;
+
+function mineNewFitbRound(){
+  if(!mineFitbData.length)return;
+  mineFitbRound=[...mineFitbData].sort(()=>Math.random()-0.5).slice(0,Math.min(10,mineFitbData.length));
+  mineFitbQIdx=0;mineFitbCorrectCount=0;
+  mineFitbResults=new Array(mineFitbRound.length).fill(null);
+  document.getElementById('mine-fitb-correct').textContent='0';
+  document.getElementById('mine-fitb-total').textContent=mineFitbRound.length;
+  document.getElementById('mine-fitb-complete').classList.remove('show');
+  mineLoadFitbQuestion();
+}
+
+function mineRenderFitbPips(){
+  document.getElementById('mine-fitb-pips').innerHTML=mineFitbRound.map((_,i)=>{
+    let cls='fitb-pip';
+    if(i<mineFitbQIdx)cls+=(mineFitbResults[i]?' done-correct':' done-wrong');
+    else if(i===mineFitbQIdx)cls+=' active';
+    return`<div class="${cls}"></div>`;
+  }).join('');
+}
+
+function mineLoadFitbQuestion(){
+  mineFitbAnswered=false;mineFitbBlanks=[];mineFitbLastFocused=null;
+  document.getElementById('mine-fitb-idx').textContent=mineFitbQIdx+1;
+  document.getElementById('mine-fitb-feedback').textContent='';
+  document.getElementById('mine-fitb-feedback').className='fitb-feedback';
+  document.getElementById('mine-fitb-next-btn').disabled=true;
+  document.getElementById('mine-fitb-hint-btn').disabled=false;
+  document.getElementById('mine-fitb-complete').classList.remove('show');
+  mineRenderFitbPips();
+
+  const q=mineFitbRound[mineFitbQIdx];
+  document.getElementById('mine-fitb-topic').textContent=q.topic||'';
+
+  // Build sentence HTML with inline inputs for [BLANK]
+  let aIdx=0;
+  const html=q.sentence.replace(/\[BLANK\]/g,()=>{
+    const ans=(q.answers[aIdx]||'').toLowerCase();
+    const id=`mine-fitb-blank-${mineFitbQIdx}-${aIdx}`;
+    aIdx++;
+    return`<input class="fitb-blank" id="${id}" data-answer="${ans}" autocomplete="off" spellcheck="false" oninput="mineFitbTyping()" onkeydown="mineFitbKeydown(event)" onfocus="mineFitbLastFocused=mineFitbBlanks[${aIdx-1}]">`;
+  });
+  document.getElementById('mine-fitb-sentence').innerHTML=html;
+
+  // Collect blank refs
+  aIdx=0;
+  q.sentence.replace(/\[BLANK\]/g,()=>{
+    const ans=(q.answers[aIdx]||'').toLowerCase();
+    const id=`mine-fitb-blank-${mineFitbQIdx}-${aIdx}`;
+    const el=document.getElementById(id);
+    mineFitbBlanks.push({el,answer:ans});
+    el.addEventListener('focus',()=>{mineFitbLastFocused=mineFitbBlanks[aIdx];});
+    aIdx++;
+  });
+
+  const bankWords=[...q.answers,...(q.distractors||[])].sort(()=>Math.random()-0.5);
+  document.getElementById('mine-fitb-chips').innerHTML=bankWords.map(w=>
+    `<div class="fitb-chip" tabindex="0" data-word="${w}" onclick="mineFitbChipClick(this)">${w}</div>`
+  ).join('');
+}
+
+function mineSyncChipUsed(){
+  const usedWords=mineFitbBlanks.map(b=>b.el.value.trim().toLowerCase()).filter(Boolean);
+  document.querySelectorAll('#mine-fitb-chips .fitb-chip').forEach(c=>{
+    const word=c.dataset.word.toLowerCase();
+    const usedCount=usedWords.filter(w=>w===word).length;
+    const chipIndex=[...document.querySelectorAll('#mine-fitb-chips .fitb-chip')].filter(x=>x.dataset.word.toLowerCase()===word).indexOf(c);
+    c.classList.toggle('used',chipIndex<usedCount);
+  });
+}
+function mineFitbTyping(){
+  mineSyncChipUsed();
+  const allFilled=mineFitbBlanks.every(b=>b.el.value.trim()!=='');
+  if(allFilled&&!mineFitbAnswered)mineCheckFitb();
+}
+function mineFitbKeydown(e){
+  if(e.key==='Enter'&&!mineFitbAnswered)mineCheckFitb();
+  if(e.key==='Tab'){
+    const blanks=mineFitbBlanks.filter(b=>!b.el.disabled);
+    if(!blanks.length)return;
+    const cur=blanks.findIndex(b=>b===mineFitbLastFocused);
+    const next=e.shiftKey?blanks[(cur-1+blanks.length)%blanks.length]:blanks[(cur+1)%blanks.length];
+    e.preventDefault();next.el.focus();
+  }
+}
+function mineFitbChipClick(chip){
+  if(chip.classList.contains('used'))return;
+  const target=(mineFitbLastFocused&&!mineFitbLastFocused.el.disabled)?mineFitbLastFocused:mineFitbBlanks.find(b=>!b.el.disabled);
+  if(!target)return;
+  target.el.value=chip.dataset.word;
+  mineFitbLastFocused=target;
+  target.el.focus();mineFitbTyping();
+}
+function mineCheckFitb(){
+  if(mineFitbAnswered)return;
+  mineFitbAnswered=true;let allCorrect=true;
+  mineFitbBlanks.forEach(b=>{
+    const val=b.el.value.trim().toLowerCase();
+    const correct=val===b.answer;
+    b.el.classList.add(correct?'correct':'wrong-ans');
+    b.el.disabled=true;
+    if(!correct){allCorrect=false;b.el.value=b.answer;}
+  });
+  mineFitbResults[mineFitbQIdx]=allCorrect;
+  if(allCorrect){
+    mineFitbCorrectCount++;
+    document.getElementById('mine-fitb-correct').textContent=mineFitbCorrectCount;
+    document.getElementById('mine-fitb-feedback').textContent='✓ Correct!';
+    document.getElementById('mine-fitb-feedback').className='fitb-feedback ok';
+  }else{
+    document.getElementById('mine-fitb-feedback').textContent='Not quite — correct answers shown above.';
+    document.getElementById('mine-fitb-feedback').className='fitb-feedback err';
+  }
+  document.getElementById('mine-fitb-next-btn').disabled=false;
+  document.getElementById('mine-fitb-hint-btn').disabled=true;
+  mineRenderFitbPips();
+}
+function mineFitbHint(){
+  mineFitbBlanks.forEach(b=>{
+    if(!b.el.disabled&&b.el.value===''){b.el.value=b.answer[0].toUpperCase();b.el.focus();}
+  });
+  document.getElementById('mine-fitb-feedback').textContent='💡 First letters revealed!';
+  document.getElementById('mine-fitb-feedback').className='fitb-feedback';
+}
+function mineFitbNext(){
+  mineFitbQIdx++;
+  if(mineFitbQIdx>=mineFitbRound.length){mineShowFitbComplete();return;}
+  mineLoadFitbQuestion();
+}
+function mineShowFitbComplete(){
+  mineRenderFitbPips();
+  const pct=Math.round((mineFitbCorrectCount/mineFitbRound.length)*100);
+  const stars=pct===100?'🌟🌟🌟':pct>=70?'⭐⭐⭐':pct>=40?'⭐⭐':'⭐';
+  document.getElementById('mine-fitb-stars').textContent=stars;
+  document.getElementById('mine-fitb-result-text').textContent=`${mineFitbCorrectCount} / ${mineFitbRound.length} correct (${pct}%). ${pct===100?'Perfect!':pct>=70?'Well done!':'Keep studying!'}`;
+  document.getElementById('mine-fitb-complete').classList.add('show');
+}
+
+// ── MINE KEYBOARD ──
+document.addEventListener('keydown',e=>{
+  const minePageVisible=document.getElementById('page-mine').classList.contains('visible');
+  if(!minePageVisible)return;
+  if(document.getElementById('mine-screen-flash')&&document.getElementById('mine-screen-flash').classList.contains('visible')){
+    if(e.key==='ArrowRight'){e.preventDefault();mineGo(1);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();mineGo(-1);}
+    else if(e.key===' '){e.preventDefault();mineFlip();}
+  }
+});
 </script>
 
-</body></html>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true" style="visibility: visible !important;"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
